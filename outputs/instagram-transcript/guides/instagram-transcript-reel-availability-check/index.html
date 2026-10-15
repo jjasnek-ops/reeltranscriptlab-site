@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Why One Instagram Reel Transcribes and Another Fails | Reel Transcript Lab</title>
+  <meta name="description" content="A valid Instagram link can still produce different transcript results. Use this controlled check to separate URL validation, public access, speech, and provider response.">
+  <link rel="canonical" href="https://reeltranscriptlab.com/guides/instagram-transcript-reel-availability-check/">
+  <link rel="stylesheet" href="/styles.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TQ2HHB4N8H"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-TQ2HHB4N8H");
+  </script>
+</head>
+<body>
+  <header class="site-header"><a class="wordmark" href="/">Reel Transcript Lab</a></header>
+  <main class="information legal article" id="main-article">
+    <p class="eyebrow">TRANSCRIPT TROUBLESHOOTING · REEL AVAILABILITY</p>
+    <h1>Why One Instagram Reel Transcribes and Another Fails</h1>
+    <p class="answer"><strong>Different Reels can return different results because a valid URL only passes this page's input check. The provider still has to find the public video and return usable speech segments. Compare one clean public link at a time, read the exact response, and do not treat a failed Reel as proof that every Reel will fail.</strong></p>
+    <figure class="article-figure">
+      <picture>
+        <source media="(max-width: 700px)" srcset="/guides/assets/instagram-transcript-reel-availability-mobile.svg">
+        <img src="/guides/assets/instagram-transcript-reel-availability.svg" width="900" height="360" alt="A Reel transcript check that separates URL validation, public retrieval, speech segments, and the final result">
+      </picture>
+      <figcaption>A transcript result has more than one gate. Record which gate produced the message before you retry.</figcaption>
+    </figure>
+
+    <h2>Start with the exact message</h2>
+    <p>“It worked for one Reel” and “it failed for another” are observations, not diagnoses. A public link can be shaped correctly while the upstream service cannot retrieve that particular video, cannot find speech, or has not finished processing. The useful first step is to keep the response instead of replacing it with a guess.</p>
+    <ul>
+      <li><strong>Input or link message:</strong> the page stopped before asking the provider for a transcript. Check that the link is a complete public Instagram URL and paste it again without extra text.</li>
+      <li><strong>Not found or not publicly accessible:</strong> the provider did not confirm that it could fetch the video. Check the original link in a signed-out or separate browser context, then try one other public Reel.</li>
+      <li><strong>Queued or processing:</strong> the provider accepted a job but has not returned the completed segments. Leave the current request open and avoid sending the same Reel repeatedly.</li>
+      <li><strong>No speech was found:</strong> the completed response contained no non-blank transcript words. Play the Reel and check whether spoken words are actually present; words printed in the picture are a separate visual check.</li>
+      <li><strong>Capacity or timeout message:</strong> the request did not produce a usable response in time. Wait before retrying, because the first job may still be active and a new request may consume another allowance.</li>
+    </ul>
+
+    <h2>Run a controlled Reel comparison</h2>
+    <p>When you need to know whether the problem belongs to one video or to the request path, change one variable at a time. Do not compare a public Reel with a private account, a profile link, and a share link in the same test and then call the result inconsistent.</p>
+    <ol>
+      <li><strong>Choose two public Reels.</strong> Use links you can open without signing in. Keep their URLs in a note so you can identify each response later.</li>
+      <li><strong>Submit the first link once.</strong> Wait for a completed transcript or a clear error. Record the visible message and whether the result contains words.</li>
+      <li><strong>Check the source video.</strong> Listen for speech, music, long silence, and audio that is too faint to understand. Look separately for words that exist only as on-screen design.</li>
+      <li><strong>Submit the second link once.</strong> Use the same browser, the same input mode, and the same wait rule. A changed browser or repeated click makes the comparison harder to read.</li>
+      <li><strong>Compare the gates.</strong> If the first link is accepted and the second is rejected as inaccessible, the difference is retrieval or visibility. If both complete but only one has words, inspect their audio and the returned transcript segments.</li>
+      <li><strong>Stop when the evidence is enough.</strong> Keep the exact response for a later report. Do not create a loop of duplicate jobs to force a different answer.</li>
+    </ol>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>Observation</th><th>What it establishes</th><th>Next check</th></tr></thead>
+      <tbody>
+        <tr><td>One URL is rejected before a result appears</td><td>The request did not pass the input or retrieval path</td><td>Check the public URL and try one other Reel</td></tr>
+        <tr><td>Both URLs are queued or active</td><td>The provider has accepted jobs but has not finished them</td><td>Keep each tab open and wait for its own update</td></tr>
+        <tr><td>One completed response has words and one is empty</td><td>The returned transcript data differs</td><td>Listen to the source and review the segment output</td></tr>
+        <tr><td>Both requests time out</td><td>No timely response reached the page</td><td>Pause, save the messages, and retry later once</td></tr>
+        <tr><td>Words are visible in the picture but absent from text</td><td>Visual text is outside a speech transcript</td><td>Read the frame manually or use a separate OCR workflow</td></tr>
+      </tbody>
+    </table></div>
+
+    <section class="tool-check" id="site-specific-check">
+      <h2>What this tool actually checks</h2>
+      <p>This section ties the comparison to the current Reel Transcript Lab implementation. These are repeatable request and display rules, not a promise that every public Reel can be transcribed.</p>
+      <ol>
+        <li><strong>The browser normalizes one public link.</strong> It parses the submitted value as a URL and permits the supported Instagram Reel, post, TV, and share-link shapes. A profile or Story path is rejected before the transcript request is made.</li>
+        <li><strong>The request stays same-origin.</strong> The page sends its request to <code>/api/transcript</code> with a same-origin header. The Worker then validates the URL again before calling the transcription provider, so a link that looks plausible in the field still has to pass the server check.</li>
+        <li><strong>The provider can return a job first.</strong> When the first response includes a job ID, the browser checks <code>/api/transcript/{jobId}</code> for a later status. It shows separate wording for queued and active states and stops when the provider reports completion or failure.</li>
+        <li><strong>The final text comes from returned segments.</strong> The browser requires an array of segments with text and timing fields. It joins non-blank segment text for the readable result and retains start and duration values for SRT and VTT exports.</li>
+        <li><strong>An empty result is a defined display branch.</strong> If the returned segments contain no non-whitespace words, the page shows “No speech was found in this video.” That message describes the data returned to this page; it does not prove that the source Reel has no audio.</li>
+        <li><strong>Provider errors remain meaningful.</strong> The Worker maps not-found, capacity, and partial-response cases to messages the browser can show. A timeout message means that this request did not receive a timely response, not that the page can see the provider's internal job state.</li>
+        <li><strong>No history joins the two tests.</strong> The page does not save prior submissions. Download or copy the result and record the URL and message yourself if you need to compare Reels later.</li>
+        <li><strong>Exports do not create a second transcript.</strong> After a completed result is held in the page, the export action sends the selected format and transcript payload to the same-origin export route. TXT contains readable words; SRT and VTT reuse the returned segment timing. An export failure is therefore separate from a provider retrieval failure.</li>
+        <li><strong>The request cannot silently switch origins.</strong> The Worker checks the browser origin on transcript and export requests. A cross-site caller receives an error instead of a provider request, so a failure from another page is not evidence about this site's public form.</li>
+        <li><strong>The comparison has a clean stopping point.</strong> Once the exact message, source-audio check, and returned segment state are recorded, stop. The implementation exposes the branch it reached; it does not expose a hidden provider confidence score or a promise that a later retry will change the branch.</li>
+      </ol>
+      <p>The practical boundary is therefore clear: this page can verify its own input, request, polling, and output branches, but it cannot turn a private or unavailable video into a public source, and it cannot infer spoken words from text that exists only in the picture.</p>
+    </section>
+
+    <h2>What not to conclude</h2>
+    <p>A mixed result does not tell you which upstream condition changed unless you kept the test controlled. One successful transcript does not prove that a second Reel is public, has speech, or is available to the provider. One failure does not prove that the input field, the exporter, or every Reel is broken.</p>
+    <p>It is also unsafe to treat a transcript as a complete copy of the video. A transcript is a speech representation. On-screen text, names, gestures, sound effects, and visual demonstrations need a separate review. If you need timed captions, open the SRT or VTT file in an editor and check the cues against the source video.</p>
+
+    <h2>Frequently asked questions</h2>
+    <h3>Why did the same Instagram transcript tool work for one creator but not another?</h3>
+    <p>The URL checks can pass for both while retrieval or returned speech data differs. Compare the exact response for each public Reel and keep the tests one at a time.</p>
+    <h3>Should I keep retrying the Reel that failed?</h3>
+    <p>No. First identify whether the message says invalid, inaccessible, queued, empty, capacity, or timeout. Wait before a single later retry when the message suggests that an earlier job may still be running.</p>
+    <h3>Can a transcript include text printed over a Reel?</h3>
+    <p>Not through the speech transcript path alone. Read the <a href="/guides/instagram-video-to-text-on-screen-words/">on-screen words guide</a> and inspect the video picture separately.</p>
+    <h3>What should I save when reporting a failed request?</h3>
+    <p>Save the public URL shape, the exact message, whether the source played with audible speech, and whether the response was empty or timed out. The page does not keep a request history for you.</p>
+    <h3>Where can I read the retry guidance for a long wait?</h3>
+    <p>Use the <a href="/guides/instagram-transcript-generator-stalled-request/">stalled-request guide</a> for the difference between queued, processing, empty, and timed-out states.</p>
+
+    <h2>References</h2>
+    <ul>
+      <li><a href="https://docs.supadata.ai/errors/transcript-unavailable">Supadata documentation: Transcript Unavailable</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/captions-prerecorded.html">W3C WAI: Captions (Prerecorded)</a></li>
+    </ul>
+    <p class="article-meta">Updated October 12, 2026 · <a href="/guides/">All guides</a> · <a href="/">Try the Instagram transcript tool</a></p>
+  </main>
+  <footer><span>Reel Transcript Lab</span><nav aria-label="Footer"><a href="/">Tool</a><a href="/guides/">Guides</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a></nav></footer>
+</body>
+</html>
+

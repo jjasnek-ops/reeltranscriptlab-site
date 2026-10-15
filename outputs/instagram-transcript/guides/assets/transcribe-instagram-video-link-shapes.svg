@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 340" role="img" aria-labelledby="title desc">
+  <title id="title">Instagram video link check</title>
+  <desc id="desc">Accepted Instagram video link paths flow through normalization and a provider handoff, while profile and Story paths stop at the validator.</desc>
+  <defs>
+    <linearGradient id="field" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#edf4e7"/>
+      <stop offset="1" stop-color="#f1edf8"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f8fbf6"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-30%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#244b3822"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#56735d"/>
+    </marker>
+  </defs>
+  <rect width="760" height="340" rx="22" fill="url(#field)"/>
+  <circle cx="681" cy="52" r="76" fill="#d9d3ef55"/>
+  <circle cx="82" cy="294" r="92" fill="#dce9c966"/>
+  <g font-family="Segoe UI, Arial, sans-serif" fill="#1c3328">
+    <text x="32" y="34" font-size="12" letter-spacing="2" fill="#5a7462" font-weight="700">PASTE THE VIDEO LINK</text>
+    <g filter="url(#shadow)">
+      <rect x="32" y="55" width="210" height="204" rx="16" fill="url(#card)" stroke="#dce6d9"/>
+      <rect x="50" y="75" width="174" height="31" rx="8" fill="#f0f5eb" stroke="#dce8d8"/>
+      <text x="62" y="95" font-size="13" fill="#31533c">/reel/ID</text>
+      <rect x="50" y="114" width="174" height="31" rx="8" fill="#f0f5eb" stroke="#dce8d8"/>
+      <text x="62" y="134" font-size="13" fill="#31533c">/reels/ID · /p/ID</text>
+      <rect x="50" y="153" width="174" height="31" rx="8" fill="#f0f5eb" stroke="#dce8d8"/>
+      <text x="62" y="173" font-size="13" fill="#31533c">/tv/ID · /share/ID</text>
+      <text x="50" y="211" font-size="11" fill="#65766a">Secure Instagram host</text>
+      <text x="50" y="230" font-size="11" fill="#65766a">Public video permalink</text>
+    </g>
+    <path d="M250 157 H298" stroke="#56735d" stroke-width="2" marker-end="url(#arrow)"/>
+    <g filter="url(#shadow)">
+      <rect x="306" y="91" width="164" height="132" rx="16" fill="url(#card)" stroke="#dce6d9"/>
+      <circle cx="336" cy="124" r="14" fill="#e7f0e1"/>
+      <path d="M329 124 l5 5 9-11" fill="none" stroke="#3d6d4c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="360" y="128" font-size="14" font-weight="700">Normalize</text>
+      <text x="328" y="160" font-size="11" fill="#65766a">www.instagram.com</text>
+      <text x="328" y="180" font-size="11" fill="#65766a">tracking text removed</text>
+      <text x="328" y="200" font-size="11" fill="#65766a">path checked again</text>
+    </g>
+    <path d="M478 157 H526" stroke="#56735d" stroke-width="2" marker-end="url(#arrow)"/>
+    <g filter="url(#shadow)">
+      <rect x="534" y="91" width="194" height="132" rx="16" fill="url(#card)" stroke="#dce6d9"/>
+      <circle cx="566" cy="124" r="14" fill="#ece8f5"/>
+      <path d="M560 124 h12 M566 118 v12" stroke="#6f6295" stroke-width="2.5" stroke-linecap="round"/>
+      <text x="589" y="128" font-size="14" font-weight="700">Transcribe</text>
+      <text x="556" y="160" font-size="11" fill="#65766a">provider retrieves media</text>
+      <text x="556" y="180" font-size="11" fill="#65766a">speech becomes segments</text>
+      <text x="556" y="200" font-size="11" fill="#65766a">result or exact error</text>
+    </g>
+    <path d="M32 285 H728" stroke="#cbdacb" stroke-width="1"/>
+    <text x="32" y="310" font-size="11" fill="#65766a">Profile, Story, insecure, or credential-bearing links stop before the provider.</text>
+    <text x="32" y="328" font-size="11" fill="#65766a">A valid shape still depends on public access and available speech.</text>
+  </g>
+</svg>

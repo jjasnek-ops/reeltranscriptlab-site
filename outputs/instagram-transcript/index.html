@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instagram Transcript</title>
+  <meta name="description" content="Turn a public Instagram Reel or video into text. Copy your transcript or download TXT, SRT, and VTT. No account required.">
+  <meta name="theme-color" content="#f7f8f5">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%232a5844'/%3E%3Cpath d='M9 10h14M9 16h14M9 22h8' stroke='white' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="canonical" href="https://reeltranscriptlab.com/">
+  <link rel="stylesheet" href="/styles.css">
+  <script defer src="/app.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TQ2HHB4N8H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-TQ2HHB4N8H");
+</script>
+</head>
+<body>
+  <a class="skip-link" href="#video-url">Skip to the tool</a>
+  <header class="site-header"><a class="wordmark" href="#top" aria-label="Instagram Transcript home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>Reel Transcript Lab</a><button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="header-navigation"><span aria-hidden="true"></span></button><nav class="header-nav" id="header-navigation" aria-label="Main"><a class="help-link" href="#how-it-works">How it works</a><a class="help-link" href="/guides/">Guides</a><a class="help-link" href="#faq">FAQ</a><a class="nav-cta" href="#video-url">Try the tool <span aria-hidden="true">↗</span></a></nav></header>
+  <main id="top">
+    <section class="workspace" aria-labelledby="tool-title">
+      <div class="heading-row"><div><p class="eyebrow">LESS REPLAYING. MORE READING.</p><h1 id="tool-title">Instagram <span>Transcript</span></h1></div><span class="free-label"><span aria-hidden="true"></span>No account needed</span></div>
+      <form id="transcript-form" novalidate>
+        <label for="video-url">Instagram video link</label>
+        <div class="input-row"><input id="video-url" name="url" type="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://www.instagram.com/reel/…" aria-describedby="input-hint" required><button class="primary" id="submit-button" type="submit">Get transcript <span aria-hidden="true">→</span></button></div>
+        <div class="input-meta"><p id="input-hint">Public Reels, video posts &amp; share links. One video at a time.</p><button id="clear-button" class="text-button" type="button" hidden>Clear</button></div>
+      </form>
+      <div id="status" class="status" role="status" aria-live="polite" hidden></div>
+      <div id="error" class="error" role="alert" hidden></div>
+      <section class="result" aria-labelledby="result-title">
+        <div class="result-header"><h2 id="result-title">Your transcript</h2><span id="result-meta">Ready when you are</span></div>
+        <div id="empty-state" class="empty-state"><span class="transcript-icon" aria-hidden="true">≡</span><h3>A video, in words.</h3><p>Paste a link above. Your transcript will appear here.</p><span class="format-preview">TXT <b>·</b> SRT <b>·</b> VTT</span></div>
+        <div id="result-content" hidden><div id="transcript-text" class="transcript-text" tabindex="0" aria-label="Transcript text"></div><div class="result-actions"><button type="button" id="copy-button" class="copy-button">Copy text</button><div class="downloads"><span>Download</span><button type="button" data-format="txt">TXT</button><button type="button" data-format="srt">SRT</button><button type="button" data-format="vtt">VTT</button></div></div><p class="result-note">Machine-generated. Review names, wording, and subtitle timing before use.</p></div>
+      </section>
+      <p class="workspace-footnote"><span aria-hidden="true">◇</span> Online transcription. No transcript history in this page.</p>
+    </section>
+    <div class="information">
+      <section id="how-it-works" class="how-section"><p class="eyebrow">FROM VIDEO TO TEXT</p><h2>Keep the words. Skip the replay.</h2><div class="steps"><article><span class="step-number">01</span><h3>Paste a public link</h3><p>Copy a Reel or video post link from Instagram. Paste it into the field above.</p></article><article><span class="step-number">02</span><h3>Let the audio become text</h3><p>Your link is sent to a transcription provider, which retrieves the video and returns its spoken words. Keep this tab open.</p></article><article><span class="step-number">03</span><h3>Take your transcript</h3><p>Copy the text, download a TXT file, or export timed subtitles as SRT or VTT.</p></article></div></section>
+      <section id="supported" class="support-section"><div><p class="eyebrow">WHAT WORKS HERE</p><h2>Clear about the limits.</h2></div><div><h3>Public videos with spoken audio</h3><p>This Instagram transcript generator accepts public Reel links, video post links, and share links that resolve to a public video. Private posts, Stories, photo-only posts, and videos Instagram restricts are not supported.</p><h3>Original-language transcription</h3><p>Language availability depends on the transcription provider and the video. Translation and speaker labels are not included.</p><h3>One video at a time</h3><p>Availability depends on the transcription service and remaining service capacity. Existing captions are used when available; otherwise speech is transcribed with AI. Restricted videos may not be accessible. Share-link compatibility has not yet been verified.</p></div></section>
+      <section id="faq" class="faq"><p class="eyebrow">A FEW USEFUL ANSWERS</p><h2>Before you press play again.</h2><details><summary>How do I turn Instagram Reels into text?</summary><p>Copy the public Reel link, paste it above, and select Get transcript. Keep this tab open while it processes. You can copy the result or download it as TXT, SRT, or VTT.</p></details><details><summary>Can I convert an Instagram video to text without captions?</summary><p>The provider can transcribe spoken audio when existing captions are unavailable. Music-only or silent videos may have no speech to transcribe.</p></details><details><summary>What is included in the subtitle downloads?</summary><p>SRT and VTT contain the recognized speech with segment start and end times. TXT contains the transcript without timecodes. All three downloads come from the same transcription.</p></details><details><summary>How accurate is the transcript?</summary><p>Accuracy depends on the language, background noise, pronunciation, and recording quality. No accuracy percentage is promised. Check the transcript against the original audio before publishing.</p></details><details><summary>Why might a public link not work?</summary><p>Instagram may restrict access, remove a post, or require a login to retrieve it. A public link is not a guarantee that its audio is accessible. Try the original Reel or video post link. This tool does not ask for your Instagram password.</p></details><details><summary>Do I need an account or a subscription?</summary><p>No account is required to use this page. Service limits may temporarily prevent new requests.</p></details><details><summary>Is my transcript saved?</summary><p>This page does not save transcript history. Processing and retention by the provider follow its policies. The result stays in this tab until you clear it or reload the page. Download anything you want to keep.</p></details></section>
+
+    </div>
+  </main>
+  <footer><span>Reel Transcript Lab <span aria-hidden="true">/</span> </span><nav aria-label="Footer"><a href="/guides/">Guides</a><a href="/privacy/">Privacy</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav></footer>
+</body>
+</html>

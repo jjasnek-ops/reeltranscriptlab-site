@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instagram Video to Text: Does It Read On-Screen Words? | Reel Transcript Lab</title>
+  <meta name="description" content="Find out what an Instagram video transcript includes, why words printed in the picture may be missing, and how to check speech and visual text separately.">
+  <link rel="canonical" href="https://reeltranscriptlab.com/guides/instagram-video-to-text-on-screen-words/">
+  <link rel="stylesheet" href="/styles.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TQ2HHB4N8H"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-TQ2HHB4N8H");
+  </script>
+</head>
+<body>
+  <header class="site-header"><a class="wordmark" href="/">Reel Transcript Lab</a></header>
+  <main class="information legal article" id="main-article">
+    <p class="eyebrow">INSTAGRAM VIDEO TO TEXT · WHAT A TRANSCRIPT CAPTURES</p>
+    <h1>Instagram Video to Text: Does a Transcript Read On-Screen Words?</h1>
+    <p class="answer"><strong>An Instagram video transcript is not a copy of every word visible in the picture. Reel Transcript Lab requests transcript segments from a transcription provider and displays their text and timing; its page code does not scan video frames for text. Use the transcript for returned speech, then check titles, stickers, labels, and other visual words in the video itself.</strong></p>
+    <figure class="article-figure">
+      <picture>
+        <source media="(max-width: 700px)" srcset="/guides/assets/video-transcript-audio-vs-visual-mobile.svg">
+        <img src="/guides/assets/video-transcript-audio-vs-visual.svg" width="900" height="390" alt="An Instagram video has two information paths: spoken audio becomes transcript text, while words shown only in the picture need a separate visual check">
+      </picture>
+      <figcaption>A video can say one thing and show another. A transcript of returned speech is not a scan of the picture.</figcaption>
+    </figure>
+
+    <h2>What an Instagram video transcript can tell you</h2>
+    <p>The transcript shown here is built from text segments returned for the public video link. Those segments can help you read spoken words without replaying the whole Reel. The result may also include timing for each segment, which the page uses when it creates subtitle files.</p>
+    <p>Words that appear only as pixels are a different source. A title card, a product label, a location tag, text added in an editing app, or handwriting on a whiteboard may never be spoken. Do not assume an Instagram video to text result contains those words. If the provider returns text associated with existing captions, that still does not mean the tool has read every visual overlay.</p>
+
+    <section class="tool-check" id="transcript-evidence">
+      <h2>What this site's request handler actually reads</h2>
+      <p>This section is based on the current Reel Transcript Lab JavaScript and Worker source. It describes the data path implemented on this site, not a general claim about every transcription service.</p>
+      <ol>
+        <li><strong>The page sends a link for a transcript.</strong> The browser requests the site's transcript route with the normalized Instagram URL, automatic mode, and text-only output disabled so timed segments can be returned. It does not upload screenshots or ask the provider for OCR.</li>
+        <li><strong>The result reader accepts transcript fields.</strong> For each returned segment, the page checks for a text value, a numeric offset, and a numeric duration. It converts the two timing values from milliseconds to seconds and keeps the segment text. There is no image-frame field or on-screen-text extraction branch in this reader.</li>
+        <li><strong>Plain text is assembled from those segments.</strong> The TXT export joins the accepted segment text with spaces and adds a final newline. It does not add text recognized from title cards, sticker layers, logos, labels, or handwritten signs.</li>
+        <li><strong>Subtitle files reuse the same returned words.</strong> SRT adds a cue number and a time range for each segment. VTT adds its file header and timed cues. Neither export performs a second pass over the video image or inserts a description of visual scenes.</li>
+        <li><strong>A missing visual phrase is not a failed speech transcript.</strong> If a product name appears on screen but is never spoken, its absence from the returned text is consistent with this site's data path. Compare the transcript with the picture before treating it as a complete record of the Reel.</li>
+      </ol>
+      <p>These checks are repeatable: inspect the browser's request construction, the segment validation in the transcript reader, and the TXT, SRT, and VTT formatter. Each path uses returned segment text and timing. The page does not extract video frames, run optical character recognition, or merge recognized picture text into the transcript.</p>
+      <p>A practical way to verify the boundary is to trace one sample result through the code: the request contains a video URL and transcript options; the reader maps returned text and timing; the formatter joins that text or adds time cues. The Worker forwards the provider's JSON response and does not decode video bytes into images. Even when a provider can use an existing caption track, that is returned transcript text, not an OCR pass over a title card. Keep any note from the picture labelled separately from the spoken transcript.</p>
+    </section>
+
+    <h2>Check speech and visible text as separate passes</h2>
+    <ol>
+      <li><strong>Read the transcript once.</strong> Mark names, numbers, or phrases that matter to your notes. The text is a reading aid; listen to the source before relying on an uncertain word.</li>
+      <li><strong>Review the video with the sound muted.</strong> Look for words that appear only in an opening card, sticker, label, or later shot. Write down the visual phrase and where it appears; the transcript does not provide that observation for you.</li>
+      <li><strong>Compare the two records.</strong> Keep spoken words and visual text distinct in your notes. If they differ, preserve both with a simple label such as “spoken” and “shown on screen” instead of silently merging them.</li>
+      <li><strong>Recheck the source when the distinction matters.</strong> A transcript can omit a phrase because it was visual-only, while a transcription can also mishear speech. The video is the reference for what appeared and what was said.</li>
+    </ol>
+    <p>This workflow is useful for quotes, product details, instructions, and research notes. It avoids turning a speech transcript into a promise that every visual detail was captured.</p>
+
+    <h2>Transcript text is not always a complete caption track</h2>
+    <p>W3C guidance describes captions as synchronized text for audio content. That can include dialogue, speaker identification, and meaningful non-speech sounds such as music or sound effects. A timed file from this tool contains the provider's returned text segments and their timing; it does not add sound descriptions or visual descriptions. Review the original media and complete any captioning work that your use requires.</p>
+    <p>Visual information that is not available through the audio may need a separate description. W3C's guidance on audio description explains how important visual details, including on-screen text, can be conveyed. A spoken-word transcript by itself cannot supply information it never received from the image.</p>
+
+    <h2>Frequently asked questions</h2>
+    <h3>Will an Instagram transcript include text stickers?</h3>
+    <p>Not because they are visible. This site's transcript reader consumes text and timing segments returned by the provider; it has no frame-reading step for text stickers or title cards.</p>
+    <h3>Is an Instagram video transcript the same as captions?</h3>
+    <p>They can share spoken words, and timed transcript segments can be exported as SRT or VTT here. Captions may also need speaker identification and meaningful non-speech audio information. Review the requirements for your use instead of assuming the export already contains every caption detail.</p>
+    <h3>How can I capture words shown but not spoken?</h3>
+    <p>Review the Reel visually and record those words separately from the transcript. This tool does not perform OCR or create a descriptive transcript of the picture.</p>
+    <h3>Which export should I use for notes?</h3>
+    <p>Use TXT when you want the returned words as a simple text passage. SRT or VTT preserve timing cues for subtitle workflows, but they still contain the provider's transcript segments rather than a visual-text scan.</p>
+
+    <h2>References</h2>
+    <ul>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Understanding/captions-prerecorded">W3C WAI: Understanding Captions (Prerecorded)</a> — describes captions for dialogue, speakers, and meaningful non-speech audio.</li>
+      <li><a href="https://www.w3.org/WAI/WCAG21/Understanding/audio-description-prerecorded">W3C WAI: Understanding Audio Description (Prerecorded)</a> — explains how important visual information, including on-screen text, can be described.</li>
+    </ul>
+    <p class="article-meta">Updated September 25, 2026 · <a href="/guides/">All guides</a> · <a href="/">Try the Instagram transcript tool</a></p>
+  </main>
+  <footer><span>Reel Transcript Lab</span><nav aria-label="Footer"><a href="/">Tool</a><a href="/guides/">Guides</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a></nav></footer>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "serverInfo": {"name": "Reel Transcript Lab Public Guide Lookup", "version": "1.0.0"},
+  "name": "com.reeltranscriptlab.public-guide-lookup",
+  "description": "Public read-only search and reading for Reel Transcript Lab guides. Transcription jobs, credentials, and writes are not exposed.",
+  "endpoint": "https://reeltranscriptlab.com/mcp",
+  "capabilities": {"tools": true, "resources": false, "prompts": false},
+  "supportedProtocolVersions": ["2025-11-25"],
+  "remotes": [{"type": "streamable-http", "url": "https://reeltranscriptlab.com/mcp", "authentication": {"required": false}, "supportedProtocolVersions": ["2025-11-25"]}],
+  "tools": ["search_public_guides", "read_public_guide"]
+}

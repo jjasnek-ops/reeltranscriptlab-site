@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 560" role="img" aria-labelledby="title desc">
+  <title id="title">Transcript, translation, and visual text are separate checks on mobile</title>
+  <desc id="desc">A mobile diagram shows speech flowing to transcript files and two separate follow-up checks.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#11182c"/><stop offset="1" stop-color="#1e2b4b"/></linearGradient>
+    <linearGradient id="mint" x1="0" x2="1"><stop stop-color="#75e1c1"/><stop offset="1" stop-color="#8aa7ff"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#050914" flood-opacity=".28"/></filter>
+  </defs>
+  <rect width="700" height="560" rx="28" fill="url(#bg)"/>
+  <text x="38" y="48" fill="#dfe9ff" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="700" letter-spacing="2">ONE SOURCE · THREE CHECKS</text>
+  <g font-family="Inter,Arial,sans-serif" filter="url(#shadow)">
+    <g transform="translate(38 80)"><rect width="280" height="112" rx="18" fill="#243756" stroke="#3b4c73"/><text x="24" y="43" fill="#fff" font-size="20" font-weight="800">SPEECH</text><text x="24" y="72" fill="#b8c8e8" font-size="15">audio words and pauses</text><rect x="24" y="91" width="150" height="4" rx="2" fill="url(#mint)"/></g>
+    <g transform="translate(382 80)"><rect width="280" height="112" rx="18" fill="#202d4d" stroke="#3b4c73"/><text x="24" y="43" fill="#fff" font-size="20" font-weight="800">TRANSCRIPT</text><text x="24" y="72" fill="#b8c8e8" font-size="15">TXT · SRT · VTT</text><rect x="24" y="91" width="150" height="4" rx="2" fill="url(#mint)"/></g>
+    <g transform="translate(38 258)"><rect width="280" height="112" rx="18" fill="#3a3240" stroke="#6c5364"/><text x="24" y="43" fill="#fff" font-size="20" font-weight="800">TRANSLATION</text><text x="24" y="72" fill="#d7bdd0" font-size="15">separate language step</text><rect x="24" y="91" width="150" height="4" rx="2" fill="#f3c77a"/></g>
+    <g transform="translate(382 258)"><rect width="280" height="112" rx="18" fill="#30334b" stroke="#596184"/><text x="24" y="43" fill="#fff" font-size="20" font-weight="800">ON-SCREEN TEXT</text><text x="24" y="72" fill="#c4c8e5" font-size="15">frame review or OCR</text><rect x="24" y="91" width="150" height="4" rx="2" fill="#ff8da5"/></g>
+  </g>
+  <text x="38" y="445" fill="#9eb0d3" font-family="Inter,Arial,sans-serif" font-size="15">A subtitle export is not a translation.</text>
+  <text x="38" y="472" fill="#9eb0d3" font-family="Inter,Arial,sans-serif" font-size="15">It is not a rendered video either.</text>
+</svg>
+

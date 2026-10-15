@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transcribe Instagram Video: Which Link to Paste | Reel Transcript Lab</title>
+  <meta name="description" content="Trying to transcribe an Instagram video? Learn which Reel, post, TV, and share links this page accepts and what to try after each URL check.">
+  <link rel="canonical" href="https://reeltranscriptlab.com/guides/transcribe-instagram-video-link-check/">
+  <link rel="stylesheet" href="/styles.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TQ2HHB4N8H"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-TQ2HHB4N8H");
+  </script>
+</head>
+<body>
+  <header class="site-header"><a class="wordmark" href="/">Reel Transcript Lab</a></header>
+  <main class="information legal article" id="main-article">
+    <p class="eyebrow">LINK CHECK · TRANSCRIBE INSTAGRAM VIDEO</p>
+    <h1>Transcribe Instagram Video: Which Link Should You Paste?</h1>
+    <p class="answer"><strong>To transcribe an Instagram video here, paste the complete HTTPS link of the public video itself. The page checks Reel, video-post, TV, and supported share-link paths, removes tracking text, and then sends the cleaned URL for transcription. A profile, Story, insecure URL, or link with credentials is rejected before a transcription request starts.</strong></p>
+    <figure class="article-figure">
+      <img src="/guides/assets/transcribe-instagram-video-link-shapes.svg" width="760" height="340" alt="A link-check diagram showing accepted Instagram video paths, normalization, and the provider handoff">
+      <figcaption>Use the video's permalink first; a valid shape is only the first access check.</figcaption>
+    </figure>
+
+    <h2>Start with the video's permalink</h2>
+    <p>Open the individual Reel or video post in Instagram and copy its link. Do not start with a profile, a collection, a Story, or an embed URL. A link can look public in a browser and still be unavailable to a transcription provider, so this page checks the URL shape first and the media access second.</p>
+    <p>The accepted shapes below describe the current browser validator. They are a contract for what the input field will accept, not a promise that every public post can be retrieved.</p>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>Link shape</th><th>What the page checks</th><th>What to do</th></tr></thead>
+      <tbody>
+        <tr><td><code>/reel/ID</code></td><td>Accepted as a Reel path on Instagram's secure host.</td><td>Copy the Reel's own share link and paste it as-is.</td></tr>
+        <tr><td><code>/reels/ID</code></td><td>Accepted as the plural Reel path.</td><td>Use the video permalink, not the creator's profile URL.</td></tr>
+        <tr><td><code>/p/ID</code></td><td>Accepted as a video-post path. The post still has to contain retrievable video and speech.</td><td>If it is a photo or a restricted post, choose the actual public video instead.</td></tr>
+        <tr><td><code>/tv/ID</code></td><td>Accepted as an Instagram TV-style video path.</td><td>Keep the complete HTTPS path when copying it.</td></tr>
+        <tr><td><code>/share/ID</code>, <code>/share/reel/ID</code>, or <code>/share/p/ID</code></td><td>Accepted by the input validator as share-link forms.</td><td>If the provider cannot retrieve the shared form, reopen the video and copy its canonical Reel or post link.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2>What happens to the link before transcription</h2>
+    <section class="tool-check" id="site-specific-check">
+      <p>This section describes the current Reel Transcript Lab implementation so you can diagnose the exact handoff rather than guess what a generic Instagram transcript tool might do.</p>
+      <ol>
+        <li><strong>Protocol and host are checked first.</strong> The browser requires <code>https:</code> and one of <code>instagram.com</code>, <code>www.instagram.com</code>, or <code>m.instagram.com</code>. Usernames, passwords, and non-default ports are rejected. This prevents a pasted address from silently pointing somewhere else.</li>
+        <li><strong>The path is checked against video forms.</strong> The validator accepts the five path families above. A profile path or a Story path produces the message <q>Use a Reel, video post, or share link, not a profile or Story.</q> Nothing is sent to the provider for that input.</li>
+        <li><strong>The URL is normalized.</strong> The page changes the host to <code>www.instagram.com</code> and removes the query string and fragment. Tracking text such as <code>?utm_source=...</code> is not part of the URL sent onward.</li>
+        <li><strong>The server applies the same boundary.</strong> The Worker re-checks the secure Instagram host and the <code>/reel/</code>, <code>/reels/</code>, <code>/p/</code>, <code>/tv/</code>, and <code>/share/</code> path pattern before calling the transcription provider. A browser that accepts a value does not bypass the server check.</li>
+        <li><strong>Only then does the provider receive the link.</strong> The request uses the cleaned URL with automatic transcript mode. The page may show a queued or processing state while the provider works; keep the tab open until the result or an error is shown.</li>
+      </ol>
+      <p>The page's URL normalization and the server's second check are both repeatable from the public source. They explain why copying the exact video permalink is more useful than repeatedly pasting a profile or a shortened redirect.</p>
+      <h3>What the request path can prove</h3>
+      <ul>
+        <li>The browser calls the same origin with the normalized URL; it does not send your Instagram password or ask for an Instagram login.</li>
+        <li>The server requires the page's request marker and same-origin request before it contacts the provider. A random cross-site caller cannot use the transcript route as a public proxy.</li>
+        <li>The first request asks for automatic transcript mode. If the provider returns a job identifier, the page polls that identifier and shows queued or active status instead of pretending the text is ready.</li>
+        <li>The browser gives a request two minutes to reach the API call, while a provider fetch on the Worker has its own 110-second abort window. A later provider timeout is therefore an observable failure state, not an empty transcript that the page silently invents.</li>
+        <li>When a completed response contains segments, the page joins their text for the visible transcript and keeps the segment start and end offsets for SRT and VTT downloads. A URL check never changes that output contract.</li>
+      </ul>
+      <p>These details are useful when a link looks correct but the result does not appear: first decide whether the failure happened before the provider handoff, during retrieval, or after a queued job. That is a more reliable next step than changing a valid path to a different spelling.</p>
+    </section>
+
+    <h2>Match the validation message to the next action</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Message</th><th>Meaning at the link stage</th><th>Next action</th></tr></thead>
+      <tbody>
+        <tr><td>“Paste a public Instagram Reel, video post, or share link to continue.”</td><td>The field is empty.</td><td>Copy the individual public video link from Instagram and paste it into the field.</td></tr>
+        <tr><td>“Paste a complete Instagram Reel, video post, or share link.”</td><td>The text is not a complete URL that the browser can parse.</td><td>Copy the full address again; include <code>https://</code>.</td></tr>
+        <tr><td>“Use an https://www.instagram.com link.”</td><td>The scheme, host, credentials, or port are outside this page's input contract.</td><td>Use the secure Instagram permalink and remove copied login or proxy information.</td></tr>
+        <tr><td>“Use a Reel, video post, or share link, not a profile or Story.”</td><td>The host is Instagram, but the path does not identify one of the accepted video forms.</td><td>Open the actual video, use its share action, and paste that link.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2>A valid shape can still fail at retrieval</h2>
+    <p>Passing the URL check only means the page can make a well-formed request. The provider can still return that the video was not found or is not publicly accessible, that it could not transcribe the video, or that capacity is temporarily unavailable. A public URL is not a guarantee that the media can be fetched.</p>
+    <p>Supadata's published <a href="https://docs.supadata.ai/errors/transcript-unavailable">Transcript Unavailable</a> explanation says a video may have no captions or subtitles available. This page uses automatic transcript mode, but it cannot add speech that the provider cannot retrieve. If the link is valid, try the original Reel or video-post permalink once; if the same provider error remains, keep the exact message for support rather than changing the URL at random.</p>
+    <p>For a longer message-to-action map covering access errors, empty speech, capacity, and timeouts, read <a href="/guides/instagram-transcript-generator-troubleshooting/">Why a public Instagram Reel can still fail to transcribe</a>.</p>
+
+    <h2>Five steps before you submit</h2>
+    <ol>
+      <li>Open the specific public video, not the account page.</li>
+      <li>Use Instagram's share control to copy the link.</li>
+      <li>Check that the pasted text begins with <code>https://</code> and uses an Instagram host.</li>
+      <li>Submit once and keep the tab open while the status changes.</li>
+      <li>If the provider fails, save the exact message and retry the canonical Reel or post link once.</li>
+    </ol>
+
+    <h2>Frequently asked questions</h2>
+    <h3>Can I use an Instagram profile URL?</h3>
+    <p>No. A profile does not identify one video, so the browser rejects it before the provider is called. Open a specific Reel or video post and copy that permalink.</p>
+    <h3>Are Instagram share links accepted?</h3>
+    <p>The input validator accepts the three share-link path forms listed above. Provider retrieval is a separate step. If a share form fails after submission, use the canonical Reel or video-post link copied from the opened video.</p>
+    <h3>Does a <code>/p/</code> link always mean the post can be transcribed?</h3>
+    <p>No. The path passes the link check, but a photo-only, removed, restricted, or speech-free post may still produce no transcript.</p>
+    <h3>Why are tracking parameters removed?</h3>
+    <p>The page strips the query string and fragment before sending the request. That keeps copied campaign text or a browser fragment from changing the media URL being checked.</p>
+
+    <h2>References</h2>
+    <ul>
+      <li><a href="https://docs.supadata.ai/errors/transcript-unavailable">Supadata Docs: Transcript Unavailable</a></li>
+    </ul>
+    <p class="article-meta">Updated October 8, 2026 · <a href="/guides/">All guides</a> · <a href="/">Try the Instagram transcript tool</a></p>
+  </main>
+  <footer><span>Reel Transcript Lab</span><nav aria-label="Footer"><a href="/">Tool</a><a href="/guides/">Guides</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a></nav></footer>
+</body>
+</html>

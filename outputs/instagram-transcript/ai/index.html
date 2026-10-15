@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI and Agent Access | Reel Transcript Lab</title>
+  <meta name="description" content="How agents can discover and read Reel Transcript Lab's public guides and use the Instagram transcript tool.">
+  <link rel="canonical" href="https://reeltranscriptlab.com/ai/">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header"><a class="wordmark" href="/">Reel Transcript Lab</a></header>
+  <main class="information legal">
+    <p class="eyebrow">PUBLIC SERVICE DOCUMENTATION</p>
+    <h1>AI and agent access</h1>
+    <p>Reel Transcript Lab turns a public Instagram Reel or video post into text in a browser. This page documents the public, read-only guide lookup available to agents.</p>
+    <h2>What is available</h2>
+    <ul>
+      <li>Search and read the five public guides currently linked from the <a href="/guides/">guide index</a>.</li>
+      <li>Use the site’s existing <a href="/">Instagram transcript tool</a> directly in a browser. Transcription is a separate user-facing action and is not exposed through the agent lookup API or MCP tools.</li>
+      <li>Read the <a href="/openapi.json">OpenAPI description</a>, call the <a href="/mcp">MCP endpoint</a>, or follow the <a href="/.well-known/agent-skills/index.json">Agent Skills index</a>.</li>
+    </ul>
+    <h2>Guide lookup</h2>
+    <p><code>GET /api/agent/guides?q=timing</code> searches guide titles, summaries, and stable slugs. <code>GET /api/agent/guides/{slug}</code> returns one known public guide. The API accepts no arbitrary URL, private content, transcript request, identity data, or write operation.</p>
+    <h2>Limits and authentication</h2>
+    <p>Guide lookup is public and read-only. No sign-in is required. OAuth registration and credential issuance are under construction and unavailable; agents must not attempt those operations. The public transcript tool remains separate and may be unavailable when its provider has no capacity.</p>
+    <h2>How agents should answer</h2>
+    <p>Use the guide’s canonical URL as the source. Preserve exact identifiers and stated limits, answer in the visitor’s language, and give concrete next steps. If the public pages do not establish a fact, say that it is unknown.</p>
+    <p><a href="/ai/index.md">Read this documentation as Markdown</a> · <a href="/ai/index.ilang">Read the DNS discovery index</a></p>
+  </main>
+  <footer><span>Reel Transcript Lab</span><nav aria-label="Footer"><a href="/">Tool</a><a href="/guides/">Guides</a><a href="/privacy/">Privacy</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav></footer>
+</body>
+</html>

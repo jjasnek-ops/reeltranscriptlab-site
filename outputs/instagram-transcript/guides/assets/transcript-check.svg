@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="300" viewBox="0 0 720 300" role="img" aria-labelledby="title desc">
+  <title id="title">Four checks for an Instagram transcript</title>
+  <desc id="desc">A link flows through access, speech, and provider checks before transcript text appears.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#edf3e3"/><stop offset="1" stop-color="#eeebf7"/></linearGradient>
+    <linearGradient id="accent"><stop stop-color="#52733f"/><stop offset="1" stop-color="#6e668d"/></linearGradient>
+  </defs>
+  <rect width="720" height="300" rx="28" fill="url(#bg)"/>
+  <text x="38" y="48" fill="#20332a" font-family="Arial,sans-serif" font-size="14" letter-spacing="2">A SIMPLE TRANSCRIPT CHECK</text>
+  <path d="M123 151H595" stroke="#b9c9ae" stroke-width="4" stroke-linecap="round"/>
+  <path d="M577 140l19 11-19 11" fill="none" stroke="#75896c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <g font-family="Arial,sans-serif" text-anchor="middle">
+    <g><circle cx="112" cy="151" r="42" fill="#fff" stroke="#cddbc3" stroke-width="2"/><text x="112" y="157" fill="#34543a" font-size="22">↗</text><text x="112" y="220" fill="#20332a" font-size="15">Link</text><text x="112" y="241" fill="#64716a" font-size="12">format</text></g>
+    <g><circle cx="278" cy="151" r="42" fill="#fff" stroke="#cddbc3" stroke-width="2"/><path d="M263 153l10 10 21-24" fill="none" stroke="#52733f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><text x="278" y="220" fill="#20332a" font-size="15">Video</text><text x="278" y="241" fill="#64716a" font-size="12">access</text></g>
+    <g><circle cx="444" cy="151" r="42" fill="#fff" stroke="#d7d1e6" stroke-width="2"/><path d="M434 165v-22m10 22v-32m10 32v-16" stroke="#6e668d" stroke-width="4" stroke-linecap="round"/><text x="444" y="220" fill="#20332a" font-size="15">Speech</text><text x="444" y="241" fill="#64716a" font-size="12">segments</text></g>
+    <g><circle cx="610" cy="151" r="42" fill="#fff" stroke="#d7d1e6" stroke-width="2"/><path d="M595 141h30M595 151h30M595 161h20" stroke="#6e668d" stroke-width="3" stroke-linecap="round"/><text x="610" y="220" fill="#20332a" font-size="15">Transcript</text><text x="610" y="241" fill="#64716a" font-size="12">review</text></g>
+  </g>
+</svg>

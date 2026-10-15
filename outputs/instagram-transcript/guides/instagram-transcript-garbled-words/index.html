@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What to Do When an Instagram Transcript Has Garbled Words | Reel Transcript Lab</title>
+  <meta name="description" content="A non-empty transcript can still contain wrong or garbled words. Use a short audio check, timing comparison, language check, and one controlled retry before reuse.">
+  <link rel="canonical" href="https://reeltranscriptlab.com/guides/instagram-transcript-garbled-words/">
+  <link rel="stylesheet" href="/styles.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TQ2HHB4N8H"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-TQ2HHB4N8H");
+  </script>
+</head>
+<body>
+  <header class="site-header"><a class="wordmark" href="/">Reel Transcript Lab</a></header>
+  <main class="information legal article" id="main-article">
+    <p class="eyebrow">TRANSCRIPT REVIEW · GARBLED WORDS</p>
+    <h1>What to Do When an Instagram Transcript Has Garbled Words</h1>
+    <p class="answer"><strong>Treat garbled transcript text as unverified output, not as a fact about the Reel. Check a short passage against the audio, compare the same passage in its timed cue, verify the displayed language and source version, then make a single controlled retry only if the evidence suggests a request problem.</strong></p>
+    <figure class="article-figure">
+      <picture>
+        <source media="(max-width: 700px)" srcset="/guides/assets/instagram-transcript-garbled-words-mobile.svg">
+        <img src="/guides/assets/instagram-transcript-garbled-words.svg" width="900" height="360" alt="A four-step check for garbled Instagram transcript words: listen, compare timing, verify language and version, then retry once">
+      </picture>
+      <figcaption>A transcript with words is still a draft until the important passage agrees with the audio.</figcaption>
+    </figure>
+
+    <h2>Garbled text is a review signal</h2>
+    <p>A transcript can be non-empty and still be unusable for a name, number, quotation, or instruction. Random characters, repeated syllables, invented sentences, and words that sound nothing like the speaker are different from an empty result. They need a review path that protects you from copying a plausible-looking mistake into a caption or brief.</p>
+    <p>The useful question is not “Is this transcript accurate?” as one global number. Ask which short passage is wrong, whether its time range points to the right audio, whether the displayed language matches the speaker, and whether the same source version was used. The current tool does not expose a confidence score or a human review flag, so those checks are the evidence you can actually collect.</p>
+
+    <h2>Use a short, repeatable check</h2>
+    <ol>
+      <li><strong>Mark one suspicious line.</strong> Copy the smallest phrase that looks impossible. Include its approximate time if you are looking at SRT or VTT. Do not judge an entire Reel from one unclear word.</li>
+      <li><strong>Replay the source passage.</strong> Listen to the original public Reel at normal speed, then once more at a slower speed if your player allows it. Check names, numbers, short function words, overlapping speakers, and words under music.</li>
+      <li><strong>Compare the cue, not just the sentence.</strong> If the text is wrong but the cue starts over the correct speech, the issue is wording. If the cue points to the wrong moment, the issue includes timing or a different source cut.</li>
+      <li><strong>Check the language label.</strong> When the provider returns a language code, the page displays it with the result. A mismatch is a reason to stop and verify the source and language rather than silently rewrite every line.</li>
+      <li><strong>Test the same public URL once.</strong> Keep the URL, message, and first result. A retry can tell you whether the response was transient; it cannot certify the new words. Do not submit a queue of duplicate jobs.</li>
+      <li><strong>Correct only after listening.</strong> Fix a name, number, or phrase in your editor after the audio check. Preserve the original download so another person can see which words came from the provider and which were corrected.</li>
+    </ol>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>What looks wrong</th><th>What to check first</th><th>Safe handling</th></tr></thead>
+      <tbody>
+        <tr><td>Random characters or repeated syllables</td><td>Replay the same time range in the public Reel</td><td>Mark the output unverified; do not quote it</td></tr>
+        <tr><td>A plausible word replaces a name or number</td><td>Listen for the exact consonants and compare the cue</td><td>Correct the line in an editor and keep the original</td></tr>
+        <tr><td>The words are right but appear over the wrong moment</td><td>Compare SRT or VTT cue boundaries with the same video cut</td><td>Adjust timing separately from text</td></tr>
+        <tr><td>The result language label differs from the speaker</td><td>Confirm the source language and public Reel version</td><td>Stop before rewriting; record the mismatch</td></tr>
+        <tr><td>Only one short passage is unclear</td><td>Check overlapping speech, music, and clipped audio</td><td>Review that passage manually instead of discarding every line</td></tr>
+        <tr><td>The whole result changes into nonsense after a retry</td><td>Compare the two raw outputs and request states</td><td>Keep both; do not choose the longer text by impression</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2>Keep transcript text separate from caption editing</h2>
+    <p>A TXT file is convenient for reading, but it removes the timing context that helps you locate a suspicious word. SRT and VTT keep the returned cue range, so use one of those files when you need to replay a passage. Neither format proves that the recognized words are correct.</p>
+    <p>If you are preparing accessibility captions, a wording correction is only one part of the job. The W3C describes synchronized captions that include dialogue, speaker identification, and meaningful non-speech audio. A speech transcript may omit speaker labels, laughter, music, and other sounds. Add those details in the editor only after checking the source.</p>
+
+    <section class="tool-check" id="site-specific-garbled-check">
+      <h2>What this tool can and cannot verify</h2>
+      <p>The current Reel Transcript Lab implementation exposes a concrete output contract, but it does not promise recognition quality. The following checks are repeatable from the page, the download, and the current Worker source.</p>
+      <ol>
+        <li><strong>The browser requests timed content.</strong> The page sends a normalized public Instagram URL to the same-origin <code>/api/transcript</code> route with text mode disabled and automatic provider mode. The browser expects a content array rather than a plain paragraph.</li>
+        <li><strong>Each returned segment is structurally validated.</strong> The page requires text, a numeric offset, and a numeric duration. It converts the millisecond offsets to start and end seconds. This catches malformed timing data, but it does not determine whether the text matches the recording.</li>
+        <li><strong>The readable transcript joins provider text.</strong> The page joins segment text with spaces and displays the optional language code when one is returned. It does not spell-check, normalize names, infer missing words, or replace unusual strings with a more familiar phrase.</li>
+        <li><strong>The page does not calculate confidence.</strong> There is no visible word confidence, acoustic score, reviewer state, or “safe to quote” flag in the current result object. A successful response is therefore a returned transcript, not an accuracy guarantee.</li>
+        <li><strong>TXT, SRT, and VTT preserve different evidence.</strong> TXT contains the joined words. SRT adds cue numbers and comma-separated millisecond timecodes. VTT adds the WEBVTT header and period-separated timecodes. The same segment text is reused in all three, so an export cannot repair a wrong word.</li>
+        <li><strong>Timing and wording are separate checks.</strong> If a cue covers the correct spoken passage but the name is wrong, correct the text. If the text is recognizable but the cue lands on a different sentence, correct the timing. The page has no in-page editor for either correction.</li>
+        <li><strong>The language label is descriptive only.</strong> The result metadata can show a provider language code. It is useful evidence to compare with the speaker, but the page does not translate the transcript or let the user select a second recognition language in the request form.</li>
+        <li><strong>Worker failures stay separate from garbled text.</strong> The Worker validates the URL, calls the provider, and maps not-found, capacity, partial-response, and timeout conditions to messages. Those response branches should not be rewritten as evidence that the words themselves are inaccurate.</li>
+        <li><strong>A retry is still a separate result.</strong> The browser may poll a job until completed or failed, and it limits the overall wait. A second request can return different text, but the page does not compare the attempts or select a winner. Save both outputs if the difference matters.</li>
+        <li><strong>The page has no correction history.</strong> It does not save the original URL, the raw provider response, your edits, or a before-and-after diff. Download the original file before making corrections in another editor.</li>
+        <li><strong>Source version matters.</strong> The Worker receives a public URL rather than a local audio file. If the public Reel is replaced, muted, remixed, or otherwise different from a draft, a new transcript is not a direct comparison with the old audio.</li>
+        <li><strong>Visual text is not a recognition correction.</strong> Words printed in the picture are outside the speech segment array. If the audio says one thing and the frame displays another, record both facts instead of changing the transcript to match the screen.</li>
+      </ol>
+      <p>The practical boundary is simple: the tool can show returned words, timing, and an optional language label, but it cannot certify them, explain every garbled passage, compare retries, or store your corrections. Use the source audio as the deciding evidence for any line you plan to publish.</p>
+    </section>
+
+    <h2>Do not pick the most confident-looking mistake</h2>
+    <p>Garbled text can look authoritative because it is formatted like a paragraph or subtitle file. Formatting is not verification. A clean-looking sentence can still be the wrong name or a made-up phrase. Keep the raw export, mark uncertain words, and only publish a corrected line after listening to the exact passage.</p>
+    <p>If the problem affects every line, stop and compare the source URL, language label, and request state before doing manual edits. If one line is wrong while the neighboring cues match the audio, isolate that line. A small, evidence-backed correction is safer than rewriting the whole transcript from memory.</p>
+
+    <h2>Frequently asked questions</h2>
+    <h3>Does a successful Instagram transcript mean every word is correct?</h3>
+    <p>No. It means the page received a valid response with transcript segments. Check names, numbers, and important quotes against the original audio.</p>
+    <h3>What should I do with random characters?</h3>
+    <p>Keep the raw result, replay the same time range, and record whether the source audio itself is clear. Do not quote or caption random characters as if they were spoken words.</p>
+    <h3>Can SRT fix garbled words?</h3>
+    <p>No. SRT preserves timing and cue numbers, while VTT preserves timing with the WEBVTT header. Both reuse the returned text. Correct wording in an editor after listening.</p>
+    <h3>Why does timing matter when the words are wrong?</h3>
+    <p>A cue can be wrong in two ways: the text can misrecognize the speech, or the cue can point at the wrong passage. Check them separately so you do not shift a correct timeline while fixing one word.</p>
+    <h3>Does Reel Transcript Lab save my corrected version?</h3>
+    <p>No. The page does not keep history or an edit diff. Download the original and save any corrected copy in your editor.</p>
+
+    <h2>References</h2>
+    <ul>
+      <li><a href="https://docs.supadata.ai/errors/transcript-unavailable">Supadata documentation: Transcript Unavailable</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/captions-prerecorded.html">W3C WAI: Captions (Prerecorded)</a></li>
+    </ul>
+    <p class="article-meta">Updated October 15, 2026 · <a href="/guides/">All guides</a> · <a href="/">Try the Instagram transcript tool</a></p>
+  </main>
+  <footer><span>Reel Transcript Lab</span><nav aria-label="Footer"><a href="/">Tool</a><a href="/guides/">Guides</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a></nav></footer>
+</body>
+</html>
+

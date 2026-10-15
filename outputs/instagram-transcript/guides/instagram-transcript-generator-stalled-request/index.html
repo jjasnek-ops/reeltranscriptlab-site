@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instagram Transcript Generator: Fix a Stalled Request | Reel Transcript Lab</title>
+  <meta name="description" content="Understand queued, processing, empty, and timed-out transcript requests, then choose a safe next step without repeating a request too soon.">
+  <link rel="canonical" href="https://reeltranscriptlab.com/guides/instagram-transcript-generator-stalled-request/">
+  <link rel="stylesheet" href="/styles.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TQ2HHB4N8H"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-TQ2HHB4N8H");
+  </script>
+</head>
+<body>
+  <header class="site-header"><a class="wordmark" href="/">Reel Transcript Lab</a></header>
+  <main class="information legal article" id="main-article">
+    <p class="eyebrow">TROUBLESHOOTING · INSTAGRAM TRANSCRIPT GENERATOR</p>
+    <h1>Instagram Transcript Generator: What to Do When a Request Stalls</h1>
+    <p class="answer"><strong>If the request says “queued” or “processing,” keep this tab open and wait for the provider's next update; the elapsed timer is not an ETA. If the result says no speech was found, replay the original video to check for audible words. If a timeout warns that the request may still be running, wait before retrying because another request may use more credits.</strong></p>
+    <figure class="article-figure">
+      <picture>
+        <source media="(max-width: 700px)" srcset="/guides/assets/transcript-request-status-mobile.svg">
+        <img src="/guides/assets/transcript-request-status.svg" width="900" height="360" alt="A transcript request moves from waiting to processing and then returns either text or an empty result, with a next step for each state">
+      </picture>
+      <figcaption>Read the current state first. A wait message, an empty transcript, and a timed-out request call for different checks.</figcaption>
+    </figure>
+
+    <h2>Read the message before trying again</h2>
+    <p>A delayed Instagram transcript request can mean that the provider has not started the job yet, is still processing it, or stopped returning updates. An empty transcript is a separate result. Start with the exact status shown on this page rather than submitting the same Reel repeatedly.</p>
+    <ul>
+      <li><strong>“Queued by the transcription provider…”</strong> means the provider reported that the job is waiting. Leave the page open for another update.</li>
+      <li><strong>“The provider is processing your video…”</strong> means the reported job is active. The page does not show a completion estimate, so the elapsed counter should not be read as a countdown.</li>
+      <li><strong>“No speech was found in this video.”</strong> means this tool received transcript segments but none contained non-blank words. It does not measure the audio waveform or prove that the original Reel is silent.</li>
+      <li><strong>“The transcription provider did not respond in time. Please try again later.”</strong> means this request stopped receiving a timely response from the provider. It does not confirm whether the provider has discarded its work.</li>
+      <li><strong>“The result is taking too long…”</strong> is the page's own long-wait message. It warns that processing may continue and that retrying may use more credits.</li>
+    </ul>
+
+    <section class="tool-check" id="status-evidence">
+      <h2>What this page's progress display actually tracks</h2>
+      <p>This section describes the current Reel Transcript Lab request flow. The figures below are implementation settings visible in the site's JavaScript and Worker source, not service guarantees or promised processing times.</p>
+      <ol>
+        <li><strong>Elapsed time is local.</strong> After submission, the page starts a one-second elapsed counter. After the display reaches 30 seconds, its note changes to “Still waiting for the provider. Please keep this tab open.” That counter reports time since this page sent the request; it does not read a provider ETA.</li>
+        <li><strong>Job updates are polled.</strong> If the first response includes a job ID, this page checks for another status every 1.5 seconds. It changes the status line for “queued” and “active” responses and stops waiting for a result when the provider reports “failed” or “completed.” That cadence is this site's polling interval, not a claim about how often the provider finishes work.</li>
+        <li><strong>The browser and Worker have separate timeouts.</strong> The page allows a request up to 120 seconds before its browser-side fetch timeout. The Worker waits up to 110 seconds for its provider request before it returns its own timeout message. These are request limits in the current implementation; they are not a maximum video duration, an SLA, or evidence that an upstream job was cancelled.</li>
+        <li><strong>The long-wait cutoff is also local.</strong> The polling loop checks for a 20-minute deadline before making another status request. When that check fires, the page says the provider may still be processing and warns that a retry may use more credits. The deadline is the point where this page stops polling, not a statement that provider processing always ends then.</li>
+        <li><strong>An empty transcript is checked after completion.</strong> The page first requires a content array, validates that each segment has text and timing fields, and then checks whether any segment contains non-whitespace text. If that final check fails, it shows “No speech was found in this video.” The message is about the returned transcript data, so listen to the source before deciding what to do next.</li>
+      </ol>
+      <p>The practical distinction is simple: a queued or active state is still a wait; an empty completed response calls for a source-audio check; and a timeout is a lost or delayed response, not proof that a new request is safe. This guide uses the wording and branches implemented by this site's current request handler and Worker.</p>
+    </section>
+
+    <h2>Use this retry sequence</h2>
+    <ol>
+      <li><strong>While the page is waiting, leave it open.</strong> Do not open several copies of the same request. Watch for a status change or an explicit error.</li>
+      <li><strong>If the transcript is empty, listen to the source.</strong> Check that the Reel has spoken words at the part you need. An instrumental clip, very faint speech, or a result with no usable words cannot provide a text passage to review.</li>
+      <li><strong>If a timeout appears, pause before resubmitting.</strong> The first request may still be running. Once you decide to try again, use the original public Reel link and submit one request so you can tell which response belongs to which attempt.</li>
+      <li><strong>If a second attempt fails, keep the displayed message.</strong> Record whether the result was still queued, active, empty, or timed out. That detail helps distinguish a request that never returned text from one that stopped receiving a provider response.</li>
+    </ol>
+    <p>This Instagram transcript generator can report the response it receives, but it cannot promise when a provider job will finish or recover speech that is absent from the returned segments. Avoid treating repeated clicks as a progress control.</p>
+
+    <h2>Frequently asked questions</h2>
+    <h3>Should I refresh when an Instagram transcript request is queued?</h3>
+    <p>Keep the current tab open and wait for the next status. Refreshing or sending another request does not move the existing job forward, and this page warns that retrying after a long wait may use more credits.</p>
+    <h3>Does “no speech was found” prove that the Reel has no audio?</h3>
+    <p>No. This tool displays that message when the completed response contains no segment with non-blank transcript text. Play the source Reel to check whether the spoken words are audible before deciding whether to retry.</p>
+    <h3>How long should I wait for a transcript?</h3>
+    <p>This page displays elapsed time but no completion estimate. Its browser request and polling deadlines are implementation safeguards, not a processing promise. Follow the status message and avoid repeated submissions while an earlier request may still be running.</p>
+    <h3>Why does an Instagram transcript generator stop responding?</h3>
+    <p>A status request may time out before a provider returns a response. The page can show its timeout message, but it cannot confirm from that message alone whether the provider has stopped processing the original job.</p>
+
+    <h2>References</h2>
+    <ul>
+      <li><a href="https://docs.supadata.ai/errors/transcript-unavailable">Supadata documentation: Transcript Unavailable</a> — provider-level transcript availability details; this site may display a simplified message instead of an upstream error.</li>
+    </ul>
+    <p class="article-meta">Updated September 24, 2026 · <a href="/guides/">All guides</a> · <a href="/">Try the Instagram transcript tool</a></p>
+  </main>
+  <footer><span>Reel Transcript Lab</span><nav aria-label="Footer"><a href="/">Tool</a><a href="/guides/">Guides</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a></nav></footer>
+</body>
+</html>

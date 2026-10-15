@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" role="img" aria-labelledby="title desc">
+  <title id="title">Empty transcript check</title>
+  <desc id="desc">Four steps: play the public Reel, listen for speech, read the exact page response, and retry once only when appropriate.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#10172f"/>
+      <stop offset="1" stop-color="#1c2c58"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" x2="1">
+      <stop offset="0" stop-color="#79f2c0"/>
+      <stop offset="1" stop-color="#65b7ff"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#050817" flood-opacity=".35"/>
+    </filter>
+  </defs>
+  <rect width="900" height="360" rx="28" fill="url(#bg)"/>
+  <path d="M0 284C150 236 250 332 410 274s258-28 490-84v170H0Z" fill="#0a1028" opacity=".55"/>
+  <text x="48" y="55" fill="#9cb5df" font-family="Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="2">EMPTY RESULT · KEEP THE EVIDENCE</text>
+  <text x="48" y="92" fill="#fff" font-family="Arial, sans-serif" font-size="26" font-weight="700">No speech returned ≠ no audio</text>
+
+  <g filter="url(#shadow)">
+    <rect x="42" y="136" width="182" height="150" rx="18" fill="#fff"/>
+    <rect x="254" y="136" width="182" height="150" rx="18" fill="#fff"/>
+    <rect x="466" y="136" width="182" height="150" rx="18" fill="#fff"/>
+    <rect x="678" y="136" width="182" height="150" rx="18" fill="#fff"/>
+  </g>
+
+  <g font-family="Arial, sans-serif">
+    <circle cx="74" cy="168" r="19" fill="url(#accent)"/><text x="74" y="174" text-anchor="middle" fill="#07132c" font-size="16" font-weight="700">1</text>
+    <text x="65" y="207" fill="#10172f" font-size="17" font-weight="700">Play the URL</text>
+    <text x="65" y="232" fill="#53617d" font-size="13">Use the public Reel</text>
+    <text x="65" y="252" fill="#53617d" font-size="13">you actually submitted.</text>
+
+    <circle cx="286" cy="168" r="19" fill="url(#accent)"/><text x="286" y="174" text-anchor="middle" fill="#07132c" font-size="16" font-weight="700">2</text>
+    <text x="277" y="207" fill="#10172f" font-size="17" font-weight="700">Listen once</text>
+    <text x="277" y="232" fill="#53617d" font-size="13">Speech, music, silence,</text>
+    <text x="277" y="252" fill="#53617d" font-size="13">or an unclear mix?</text>
+
+    <circle cx="498" cy="168" r="19" fill="url(#accent)"/><text x="498" y="174" text-anchor="middle" fill="#07132c" font-size="16" font-weight="700">3</text>
+    <text x="489" y="207" fill="#10172f" font-size="17" font-weight="700">Read the branch</text>
+    <text x="489" y="232" fill="#53617d" font-size="13">Empty, inaccessible,</text>
+    <text x="489" y="252" fill="#53617d" font-size="13">queued, or timed out?</text>
+
+    <circle cx="710" cy="168" r="19" fill="url(#accent)"/><text x="710" y="174" text-anchor="middle" fill="#07132c" font-size="16" font-weight="700">4</text>
+    <text x="701" y="207" fill="#10172f" font-size="17" font-weight="700">Retry once</text>
+    <text x="701" y="232" fill="#53617d" font-size="13">Only after the branch</text>
+    <text x="701" y="252" fill="#53617d" font-size="13">tells you to wait.</text>
+  </g>
+  <g stroke="#79f2c0" stroke-width="3" fill="none" stroke-linecap="round">
+    <path d="M226 211h22"/><path d="m241 202 9 9-9 9"/>
+    <path d="M438 211h22"/><path d="m453 202 9 9-9 9"/>
+    <path d="M650 211h22"/><path d="m665 202 9 9-9 9"/>
+  </g>
+  <text x="48" y="330" fill="#9cb5df" font-family="Arial, sans-serif" font-size="13">The page can report returned segments; it cannot diagnose a waveform or read words printed in the frame.</text>
+</svg>
+

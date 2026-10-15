@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="980" viewBox="0 0 640 980" role="img" aria-labelledby="title desc">
+  <title id="title">Transcript request status path</title>
+  <desc id="desc">A vertical guide to queued, processing, completed and empty transcript states, with a reminder to pause before retrying after a timeout.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7f9f2"/><stop offset="1" stop-color="#f0edf9"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a9c884"/><stop offset="1" stop-color="#d9c3ed"/></linearGradient>
+    <filter id="shadow" x="-10%" y="-15%" width="120%" height="135%"><feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#2b3c32" flood-opacity=".08"/></filter>
+  </defs>
+  <rect width="640" height="980" rx="28" fill="url(#bg)"/>
+  <text x="34" y="53" fill="#64746a" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2">READ THE STATE · CHOOSE THE NEXT STEP</text>
+  <g filter="url(#shadow)">
+    <rect x="34" y="88" width="572" height="132" rx="19" fill="#fff"/>
+    <rect x="34" y="244" width="572" height="132" rx="19" fill="#fff"/>
+    <rect x="34" y="400" width="572" height="132" rx="19" fill="#fff"/>
+    <rect x="34" y="556" width="572" height="132" rx="19" fill="#fff"/>
+  </g>
+  <path d="M74 222v14M74 378v14M74 534v14" stroke="#718579" stroke-width="2"/>
+  <rect x="55" y="108" width="36" height="36" rx="11" fill="#edf3e5"/><text x="68" y="133" fill="#315540" font-family="Segoe UI,Arial,sans-serif" font-size="17" font-weight="700">1</text>
+  <text x="112" y="137" fill="#20332a" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="650">Queued</text>
+  <text x="112" y="171" fill="#64716a" font-family="Segoe UI,Arial,sans-serif" font-size="15">Wait for the next update.</text>
+  <rect x="55" y="264" width="36" height="36" rx="11" fill="#f6f0df"/><text x="68" y="289" fill="#805e26" font-family="Segoe UI,Arial,sans-serif" font-size="17" font-weight="700">2</text>
+  <text x="112" y="293" fill="#20332a" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="650">Processing</text>
+  <text x="112" y="327" fill="#64716a" font-family="Segoe UI,Arial,sans-serif" font-size="15">Elapsed time is not an ETA.</text>
+  <rect x="55" y="420" width="36" height="36" rx="11" fill="#edf3e5"/><text x="68" y="445" fill="#315540" font-family="Segoe UI,Arial,sans-serif" font-size="17" font-weight="700">3</text>
+  <text x="112" y="449" fill="#20332a" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="650">Completed</text>
+  <text x="112" y="483" fill="#64716a" font-family="Segoe UI,Arial,sans-serif" font-size="15">Inspect the returned text.</text>
+  <rect x="55" y="576" width="36" height="36" rx="11" fill="url(#accent)"/><text x="68" y="601" fill="#344535" font-family="Segoe UI,Arial,sans-serif" font-size="17" font-weight="700">4</text>
+  <text x="112" y="605" fill="#20332a" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="650">Text or no speech?</text>
+  <text x="112" y="639" fill="#64716a" font-family="Segoe UI,Arial,sans-serif" font-size="15">Review the original audio if empty.</text>
+  <rect x="34" y="728" width="572" height="178" rx="20" fill="#20332a"/>
+  <circle cx="72" cy="778" r="17" fill="#d9c3ed"/><path d="M72 768v11l7 5" fill="none" stroke="#20332a" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="106" y="779" fill="#fff" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="650">Timeout? Pause before retrying.</text>
+  <text x="58" y="828" fill="#d7dfd8" font-family="Segoe UI,Arial,sans-serif" font-size="15">A timeout does not confirm that the provider</text>
+  <text x="58" y="853" fill="#d7dfd8" font-family="Segoe UI,Arial,sans-serif" font-size="15">stopped the first request.</text>
+  <text x="36" y="947" fill="#6b796f" font-family="Segoe UI,Arial,sans-serif" font-size="12" letter-spacing="1.5">STATUS ≠ ETA</text>
+</svg>

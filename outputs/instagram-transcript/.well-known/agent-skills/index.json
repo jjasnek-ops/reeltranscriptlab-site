@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "digest": "sha256:6eb84f60f32bfddc88c443c6e6e4c5d1c0b416fe6af931272967e3eb65f42750",
+      "type": "skill-md",
+      "name": "site-lookup",
+      "url": "https://reeltranscriptlab.com/ai/skills/site-lookup/SKILL.md",
+      "description": "Search and read Reel Transcript Lab's public guides using its bounded read-only API."
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Reel Transcript Lab Public Guide Lookup API",
+    "version": "1.0.0",
+    "description": "Public, read-only search and retrieval for published guides. This API does not submit transcription jobs or require authentication."
+  },
+  "servers": [{"url": "https://reeltranscriptlab.com"}],
+  "paths": {
+    "/api/agent/guides": {
+      "get": {
+        "operationId": "searchPublicGuides",
+        "summary": "Search public guides",
+        "description": "Search published guide titles, summaries, and stable slugs. An empty query returns an empty items list.",
+        "parameters": [{"name": "q", "in": "query", "required": false, "schema": {"type": "string", "maxLength": 120}}],
+        "responses": {
+          "200": {"description": "Matching public guide summaries", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/GuideSearchResult"}}}},
+          "405": {"description": "Only GET is supported"}
+        }
+      }
+    },
+    "/api/agent/guides/{slug}": {
+      "get": {
+        "operationId": "readPublicGuide",
+        "summary": "Read one public guide",
+        "description": "Read a published guide using its stable slug from the public guide index. Arbitrary URLs are not accepted.",
+        "parameters": [{"name": "slug", "in": "path", "required": true, "schema": {"type": "string", "pattern": "^[a-z0-9-]+$"}}],
+        "responses": {
+          "200": {"description": "Guide text and canonical source URL", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Guide"}}}},
+          "404": {"description": "No published guide has that slug"},
+          "405": {"description": "Only GET is supported"}
+        }
+      }
+    },
+    "/api/agent/status": {
+      "get": {
+        "operationId": "getPublicGuideLookupStatus",
+        "summary": "Check guide lookup availability",
+        "responses": {
+          "200": {
+            "description": "Read-only guide lookup is responding",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["status", "service"],
+                  "properties": {
+                    "status": {"const": "ok"},
+                    "service": {"const": "public-guide-lookup"},
+                    "access": {"const": "read-only"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "GuideSummary": {"type": "object", "required": ["id", "title", "summary", "source_url"], "properties": {"id": {"type": "string"}, "title": {"type": "string"}, "summary": {"type": "string"}, "source_url": {"type": "string", "format": "uri"}}},
+      "GuideSearchResult": {"type": "object", "required": ["items", "count"], "properties": {"items": {"type": "array", "items": {"$ref": "#/components/schemas/GuideSummary"}}, "count": {"type": "integer", "minimum": 0}}},
+      "Guide": {"type": "object", "required": ["id", "title", "content", "source_url"], "properties": {"id": {"type": "string"}, "title": {"type": "string"}, "content": {"type": "string"}, "source_url": {"type": "string", "format": "uri"}}}
+    }
+  }
+}

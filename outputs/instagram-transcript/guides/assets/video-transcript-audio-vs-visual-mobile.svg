@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="560" viewBox="0 0 420 560" role="img" aria-labelledby="title desc">
+  <title id="title">Two information paths in a video</title>
+  <desc id="desc">Spoken audio becomes transcript text, while visible words in the picture need a separate visual check.</desc>
+  <rect width="420" height="560" rx="24" fill="#f4f7f1"/>
+  <rect x="34" y="28" width="352" height="150" rx="20" fill="#fff" stroke="#dfe7dc" stroke-width="2"/>
+  <rect x="55" y="49" width="96" height="108" rx="14" fill="#e9f1e7"/>
+  <rect x="68" y="62" width="70" height="72" rx="10" fill="#2a5844"/>
+  <rect x="78" y="77" width="50" height="8" rx="4" fill="#f3f6ee"/>
+  <rect x="78" y="94" width="34" height="7" rx="3.5" fill="#9ab49e"/>
+  <text x="179" y="94" fill="#20332a" font-family="Arial,sans-serif" font-size="17" font-weight="700">ONE INSTAGRAM VIDEO</text>
+  <text x="179" y="124" fill="#64716a" font-family="Arial,sans-serif" font-size="14">sound track + picture</text>
+  <path d="M210 184v31" stroke="#6c8971" stroke-width="4" stroke-linecap="round"/>
+  <path d="m198 205 12 14 12-14" fill="none" stroke="#6c8971" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="34" y="226" width="352" height="124" rx="20" fill="#eaf3e8" stroke="#d2e2d3" stroke-width="2"/>
+  <circle cx="82" cy="288" r="24" fill="#2a5844"/>
+  <path d="M73 288h5l7-8v16l-7-8h-5m17-7q8 7 0 14m5-19q13 12 0 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="123" y="278" fill="#20332a" font-family="Arial,sans-serif" font-size="17" font-weight="700">SPOKEN WORDS</text>
+  <text x="123" y="307" fill="#64716a" font-family="Arial,sans-serif" font-size="14">returned as transcript text</text>
+  <path d="M210 355v30" stroke="#97a398" stroke-width="4" stroke-linecap="round" stroke-dasharray="7 8"/>
+  <path d="m198 375 12 14 12-14" fill="none" stroke="#97a398" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="34" y="396" width="352" height="136" rx="20" fill="#fff" stroke="#dfe7dc" stroke-width="2"/>
+  <rect x="56" y="427" width="51" height="70" rx="8" fill="#f0f2ec" stroke="#b7c7b9" stroke-width="2"/>
+  <path d="M66 442h31m-31 13h25m-25 13h29m-29 13h19" stroke="#718775" stroke-width="3.5" stroke-linecap="round"/>
+  <text x="126" y="443" fill="#20332a" font-family="Arial,sans-serif" font-size="15" font-weight="700">WORDS IN THE PICTURE</text>
+  <text x="126" y="469" fill="#64716a" font-family="Arial,sans-serif" font-size="13">Check titles, stickers, and labels</text>
+  <text x="126" y="493" fill="#2a5844" font-family="Arial,sans-serif" font-size="11" font-weight="700">NOT SCANNED BY THIS TOOL</text>
+</svg>

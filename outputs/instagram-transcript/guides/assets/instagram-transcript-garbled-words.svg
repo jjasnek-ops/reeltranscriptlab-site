@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" role="img" aria-labelledby="title desc">
+  <title id="title">Garbled transcript review</title>
+  <desc id="desc">Four steps: mark a suspicious line, listen to the source, compare its cue timing, and verify the language before one controlled retry.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#11162e"/>
+      <stop offset="1" stop-color="#26345f"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" x2="1">
+      <stop offset="0" stop-color="#ffcf70"/>
+      <stop offset="1" stop-color="#ff8ca8"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#050817" flood-opacity=".36"/>
+    </filter>
+  </defs>
+  <rect width="900" height="360" rx="28" fill="url(#bg)"/>
+  <path d="M0 289c147-58 271 47 412-6s262-24 488-84v161H0Z" fill="#090e26" opacity=".58"/>
+  <text x="48" y="55" fill="#b5c3e4" font-family="Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="2">TRANSCRIPT REVIEW · UNVERIFIED WORDS</text>
+  <text x="48" y="92" fill="#fff" font-family="Arial, sans-serif" font-size="26" font-weight="700">A clean-looking line can still be wrong</text>
+
+  <g filter="url(#shadow)">
+    <rect x="42" y="136" width="182" height="150" rx="18" fill="#fff"/>
+    <rect x="254" y="136" width="182" height="150" rx="18" fill="#fff"/>
+    <rect x="466" y="136" width="182" height="150" rx="18" fill="#fff"/>
+    <rect x="678" y="136" width="182" height="150" rx="18" fill="#fff"/>
+  </g>
+
+  <g font-family="Arial, sans-serif">
+    <circle cx="74" cy="168" r="19" fill="url(#accent)"/><text x="74" y="174" text-anchor="middle" fill="#24142a" font-size="16" font-weight="700">1</text>
+    <text x="65" y="207" fill="#11162e" font-size="17" font-weight="700">Mark the line</text>
+    <text x="65" y="232" fill="#596581" font-size="13">Keep the smallest phrase</text>
+    <text x="65" y="252" fill="#596581" font-size="13">that sounds impossible.</text>
+
+    <circle cx="286" cy="168" r="19" fill="url(#accent)"/><text x="286" y="174" text-anchor="middle" fill="#24142a" font-size="16" font-weight="700">2</text>
+    <text x="277" y="207" fill="#11162e" font-size="17" font-weight="700">Listen again</text>
+    <text x="277" y="232" fill="#596581" font-size="13">Names, numbers, speech</text>
+    <text x="277" y="252" fill="#596581" font-size="13">under music need care.</text>
+
+    <circle cx="498" cy="168" r="19" fill="url(#accent)"/><text x="498" y="174" text-anchor="middle" fill="#24142a" font-size="16" font-weight="700">3</text>
+    <text x="489" y="207" fill="#11162e" font-size="17" font-weight="700">Check the cue</text>
+    <text x="489" y="232" fill="#596581" font-size="13">Right words, right moment?</text>
+    <text x="489" y="252" fill="#596581" font-size="13">Timing and text are separate.</text>
+
+    <circle cx="710" cy="168" r="19" fill="url(#accent)"/><text x="710" y="174" text-anchor="middle" fill="#24142a" font-size="16" font-weight="700">4</text>
+    <text x="701" y="207" fill="#11162e" font-size="17" font-weight="700">Verify, then retry</text>
+    <text x="701" y="232" fill="#596581" font-size="13">Check language and version</text>
+    <text x="701" y="252" fill="#596581" font-size="13">before one controlled try.</text>
+  </g>
+  <g stroke="#ffcf70" stroke-width="3" fill="none" stroke-linecap="round">
+    <path d="M226 211h22"/><path d="m241 202 9 9-9 9"/>
+    <path d="M438 211h22"/><path d="m453 202 9 9-9 9"/>
+    <path d="M650 211h22"/><path d="m665 202 9 9-9 9"/>
+  </g>
+  <text x="48" y="330" fill="#b5c3e4" font-family="Arial, sans-serif" font-size="13">Formatting is not verification. Use the source audio as the deciding evidence.</text>
+</svg>
+

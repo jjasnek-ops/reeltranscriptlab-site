@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instagram Caption Generator: Transcript or Video Captions? | Reel Transcript Lab</title>
+  <meta name="description" content="Choose between Instagram post copy, a speech transcript, timed subtitles, and visible video captions. See exactly what this tool exports.">
+  <link rel="canonical" href="https://reeltranscriptlab.com/guides/instagram-caption-generator-transcript-or-captions/">
+  <link rel="stylesheet" href="/styles.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TQ2HHB4N8H"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-TQ2HHB4N8H");
+  </script>
+</head>
+<body>
+  <header class="site-header"><a class="wordmark" href="/">Reel Transcript Lab</a></header>
+  <main class="information legal article" id="main-article">
+    <p class="eyebrow">INSTAGRAM CAPTION GENERATOR · CHOOSE THE OUTPUT</p>
+    <h1>Instagram Caption Generator: Transcript or Video Captions?</h1>
+    <p class="answer"><strong>“Instagram caption generator” can mean post-description copy or words timed to appear over a video. Reel Transcript Lab returns the spoken words from a public Instagram video as copyable text or a TXT, SRT, or VTT download. It does not write promotional post copy, style text on the video, or export an edited video.</strong></p>
+    <figure class="article-figure">
+      <picture>
+        <source media="(max-width: 700px)" srcset="/guides/assets/instagram-caption-output-choice-mobile.svg">
+        <img src="/guides/assets/instagram-caption-output-choice.svg" width="900" height="360" alt="Four different destinations for words: an Instagram post description, a plain transcript, timed subtitle files, and text visibly placed on a video">
+      </picture>
+      <figcaption>Choose the output by where the words need to appear.</figcaption>
+    </figure>
+
+    <h2>First decide where the words should go</h2>
+    <ul>
+      <li><strong>Below the post:</strong> You need a post caption: a description, context, or call to action that accompanies the Reel. Write that copy for the post; this tool does not invent or rewrite it.</li>
+      <li><strong>In a document:</strong> You need the spoken words to read, quote, or edit. Copy the result or download TXT. This is transcript text without subtitle cue times.</li>
+      <li><strong>Timed to speech:</strong> You need subtitle cues. Download SRT or VTT, then open the file in a compatible subtitle or video editor. The cues carry text and timing, not a visual design.</li>
+      <li><strong>Visible over the video:</strong> You need a captioned video. Add the transcript or subtitle file in an editor, review the words and timing, style the captions, and export a new video file. This page does not perform that edit.</li>
+    </ul>
+    <p>A transcript, an Instagram post caption, and a visible caption track are related but different deliverables. Starting with the wrong one can leave you with text in the wrong place: a useful transcript will not automatically appear on the Reel, and a short post description is not a record of every spoken line.</p>
+
+    <h2>A practical transcript-to-caption workflow</h2>
+    <ol>
+      <li><strong>Get the spoken text.</strong> Paste a public Reel, video-post, or supported share link into the tool and request a transcript. The page processes one video at a time.</li>
+      <li><strong>Choose the file for the next step.</strong> Use copy or TXT when you want readable words. Choose SRT or VTT when the next editor needs timed cues. Neither file is a finished, branded video.</li>
+      <li><strong>Make the edit in the tool that produces your final video.</strong> Import a timed file, correct any words you hear differently, inspect where each cue appears, and export from that editor. If you only need post copy, draft it separately from the transcript and check it in the post composer.</li>
+      <li><strong>Watch the exported version.</strong> Check that the text is legible on a phone, does not cover important visual details, and stays in step with the audio. A correct file can still be placed or styled badly by the editor.</li>
+    </ol>
+
+    <section class="tool-check" id="what-this-tool-exports">
+      <h2>What this page's downloads actually contain</h2>
+      <p>The following distinctions come from the current Reel Transcript Lab page and Worker code. They describe this site's implemented path and can be checked against its browser JavaScript and downloadable responses.</p>
+      <ol>
+        <li><strong>The request asks for transcript segments.</strong> After validating an Instagram link, the page calls its own transcript route with automatic mode and text-only output disabled. The Worker forwards that request to its transcription provider. The request does not ask for a post description, caption rewrite, visual styling, or an encoded video.</li>
+        <li><strong>The page reads text and timing fields.</strong> Its result handler accepts a list of segments and checks each segment for text, a numeric offset, and a numeric duration. It turns those timing values from milliseconds into seconds. A response without usable segments or any nonblank segment text is shown as an error instead of being presented as a finished caption.</li>
+        <li><strong>Copy and TXT keep the words readable.</strong> The copy action writes the joined transcript text to the clipboard. The TXT formatter joins segment text with spaces and appends a newline. That path adds no cue numbers or timecodes, which makes it useful as a text source but not as a timed subtitle track.</li>
+        <li><strong>SRT and VTT reuse the same segments.</strong> The SRT formatter numbers the cues and uses a comma before the milliseconds in each time range. The VTT formatter starts with a <code>WEBVTT</code> header and uses a period in its time ranges. Both calculate cue ends from a segment's offset plus duration. The formatter does not change the recognized wording or add font, color, position, or animation settings.</li>
+        <li><strong>The export response is a text file.</strong> The browser posts the selected format and formatted transcript to the site's export route. The Worker returns a TXT, SRT, or VTT download with a text content type. That route has no video encoder or edited-video response, so downloading an SRT or VTT is a handoff to another editing step, not a render of captions onto the Reel.</li>
+        <li><strong>A post caption is outside this data path.</strong> The result reader and three formatters only handle returned transcript segments. They contain no prompt or operation that creates a hook, summary, hashtags, or call to action for the Instagram post description. If you need those, draft and review them separately.</li>
+      </ol>
+      <p>You can reproduce the format check without assuming what another tool does: download each available format, open the files in a plain-text editor, and inspect the first lines. TXT is joined text; SRT shows numbered, timed cues; VTT has its header and timed cues. Then open SRT or VTT in the editor you will use and confirm that the captions display. The file itself does not prove that a finished video has been rendered.</p>
+    </section>
+
+    <h2>Review captions before publishing</h2>
+    <p>Text recognition and caption completeness are separate checks. W3C guidance describes prerecorded captions as synchronized text for relevant audio, including dialogue, speaker identification, and meaningful non-speech sounds. A speech transcript may not include every sound cue. Add missing information when your use requires it, then replay the result against the original.</p>
+    <p>For a YouTube caption workflow, YouTube's help explains that caption text and timestamps can be edited, and that a downloaded caption file can be changed and uploaded again. Other editors and publishing platforms have their own import steps, so confirm the final file in the tool that will publish it.</p>
+
+    <h2>Frequently asked questions</h2>
+    <h3>Does this Instagram caption generator write the caption under my post?</h3>
+    <p>No. This page transcribes spoken words from a public video. It does not generate a promotional post description, hook, summary, hashtag list, or call to action.</p>
+    <h3>Will an SRT or VTT download put words on my Reel?</h3>
+    <p>No. Those downloads contain timed text cues. Import and review them in a video editor, then export a captioned video if that is the result you need.</p>
+    <h3>Which download should I choose?</h3>
+    <p>Choose TXT for readable transcript text. Choose SRT or VTT if your next step needs timed subtitle cues. Review both the wording and timing before publishing.</p>
+    <h3>Are captions and transcripts identical?</h3>
+    <p>They can share dialogue, but caption tracks may also need speaker identification and meaningful non-speech audio. Review the media and the requirements for your intended use.</p>
+
+    <h2>References</h2>
+    <ul>
+      <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/captions-prerecorded.html">W3C WAI: Understanding Captions (Prerecorded)</a></li>
+      <li><a href="https://support.google.com/youtube/answer/2734705?hl=en">YouTube Help: Edit or remove captions</a></li>
+    </ul>
+    <p class="article-meta">Updated October 11, 2026 · <a href="/guides/">All guides</a> · <a href="/">Try the Instagram transcript tool</a></p>
+  </main>
+  <footer><span>Reel Transcript Lab</span><nav aria-label="Footer"><a href="/">Tool</a><a href="/guides/">Guides</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a></nav></footer>
+</body>
+</html>

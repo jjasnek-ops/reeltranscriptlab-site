@@ -1,0 +1,17 @@
+{
+  "$schema": "https://developers.cloudflare.com/workers/wrangler/config-schema.json",
+  "name": "reeltranscriptlab",
+  "main": "./reeltranscriptlab-worker.mjs",
+  "compatibility_date": "2026-09-22",
+  "assets": {
+    "directory": "./instagram-transcript",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": ["/api/*", "/", "/mcp", "/openapi.json", "/auth.md", "/.well-known/*", "/ai/*"]
+  },
+  "ratelimits": [
+    {"name":"TRANSCRIPT_LIMIT","namespace_id":"9262201","simple":{"limit":3,"period":60}},
+    {"name":"POLL_LIMIT","namespace_id":"9262202","simple":{"limit":60,"period":60}}
+  ],
+  "secrets": {"required":["SUPADATA_API_KEY"]}
+}

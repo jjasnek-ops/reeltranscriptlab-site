@@ -1,0 +1,12 @@
+::ILANG
+[TYPE:service-index][LANG:en][STATUS:available]
+::STATE{@SERVICE, origin:https://reeltranscriptlab.com, purpose:public_read_only_guide_lookup}
+::STATE{@SOURCES, page:https://reeltranscriptlab.com/guides/, api:https://reeltranscriptlab.com/api/agent/guides, openapi:https://reeltranscriptlab.com/openapi.json, mcp:https://reeltranscriptlab.com/mcp}
+::STATE{@LIMITS, only:published_guide_slugs, arbitrary_url_fetch:false, transcription_jobs:false, writes:false, authentication:not_required}
+::HOW{search_guides|method=GET|path=/api/agent/guides?q={query}|query:max_120_chars}
+::HOW{read_guide|method=GET|path=/api/agent/guides/{slug}|slug=from_public_guide_index}
+::RULE{unknown_slug⇒HTTP_404}
+::RULE{empty_query⇒empty_items_list}
+::RULE{answer⇒cite_source_url_preserve_limits_use_visitor_language}
+::BOUNDARY{never:claim_OAuth_registration_or_token_issuance_is_available}
+::Ω

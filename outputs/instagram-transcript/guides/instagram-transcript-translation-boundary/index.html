@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Does an Instagram Transcript Translate Speech or On-Screen Text? | Reel Transcript Lab</title>
+  <meta name="description" content="An Instagram transcript is a speech output, not a translation or OCR pass. Learn what the transcript contains, what stays in the video picture, and which step comes next.">
+  <link rel="canonical" href="https://reeltranscriptlab.com/guides/instagram-transcript-translation-boundary/">
+  <link rel="stylesheet" href="/styles.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TQ2HHB4N8H"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-TQ2HHB4N8H");
+  </script>
+</head>
+<body>
+  <header class="site-header"><a class="wordmark" href="/">Reel Transcript Lab</a></header>
+  <main class="information legal article" id="main-article">
+    <p class="eyebrow">TRANSCRIPT BOUNDARIES · TRANSLATION</p>
+    <h1>Does an Instagram Transcript Translate Speech or On-Screen Text?</h1>
+    <p class="answer"><strong>No. An Instagram transcript turns returned speech segments into readable text and timed subtitle files. It does not translate the words, read text burned into the picture, or render a translated captioned video. Use the transcript as the source for a separate translation and review the video frame for words that were never spoken.</strong></p>
+    <figure class="article-figure">
+      <picture>
+        <source media="(max-width: 700px)" srcset="/guides/assets/instagram-transcript-translation-boundary-mobile.svg">
+        <img src="/guides/assets/instagram-transcript-translation-boundary.svg" width="900" height="360" alt="A diagram separating speech transcript output from translation and on-screen text review">
+      </picture>
+      <figcaption>Keep the speech path, translation step, and visual-text check separate so each result has a clear source.</figcaption>
+    </figure>
+
+    <h2>Three different jobs often called “captions”</h2>
+    <p>A short Reel can contain spoken words, text added in an editor, and a language change requested by a viewer. Those are three different jobs. A speech transcript records what the audio recognition response contains. Translation changes the language. OCR or a manual visual review reads words that exist only in the picture. Combining them into one promise makes it hard to tell what was actually checked.</p>
+    <ul>
+      <li><strong>Transcript:</strong> a readable version of recognized speech, optionally kept with cue timing.</li>
+      <li><strong>Translation:</strong> a new-language version created after you have a source transcript or another source text.</li>
+      <li><strong>On-screen text:</strong> words permanently or temporarily shown in the video image, which need a visual check or a separate text-recognition workflow.</li>
+      <li><strong>Rendered captions:</strong> text placed on top of a video by an editor. A subtitle file can guide that step, but downloading SRT or VTT does not render the video.</li>
+    </ul>
+
+    <h2>Use a two-pass workflow</h2>
+    <p>When a Reel is in a language you are learning, or when its message mixes speech and graphic text, make the boundary explicit before you edit anything.</p>
+    <ol>
+      <li><strong>Capture the source speech.</strong> Paste one public Instagram video link and read the returned transcript. Save the TXT version if you need a clean reading copy.</li>
+      <li><strong>Check the timing.</strong> Open SRT or VTT when you need to match a sentence to the original audio. Listen to the source rather than assuming every segment is perfectly phrased.</li>
+      <li><strong>Translate the source text separately.</strong> Give a translator or translation tool the transcript you actually reviewed. Keep the original beside the translation so names, idioms, and uncertain words can be checked.</li>
+      <li><strong>Review the picture.</strong> Pause the Reel for title cards, labels, names, signs, and other words that do not occur in the speech. Add those to your own translation notes only after checking the frame.</li>
+      <li><strong>Render captions in an editor if needed.</strong> Correct the translated text, adjust cue boundaries, and watch the exported video. The transcript page does not perform that final video-editing step.</li>
+    </ol>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>Question</th><th>Use this evidence</th><th>Separate follow-up</th></tr></thead>
+      <tbody>
+        <tr><td>What did the speaker say?</td><td>Copy text or TXT</td><td>Check names and uncertain words against the audio</td></tr>
+        <tr><td>When did a sentence begin?</td><td>SRT or VTT timing</td><td>Adjust cues in the subtitle editor when necessary</td></tr>
+        <tr><td>What does a title card say?</td><td>Paused video frame</td><td>Transcribe or translate the visual text manually or with a separate OCR tool</td></tr>
+        <tr><td>How do I show another language on the video?</td><td>Reviewed source transcript plus translation</td><td>Render and watch the edited captioned video</td></tr>
+      </tbody>
+    </table></div>
+
+    <section class="tool-check" id="site-specific-boundary">
+      <h2>What this site returns, step by step</h2>
+      <p>The current Reel Transcript Lab implementation has a narrow, testable output contract. Knowing the exact branch prevents a transcript request from being mistaken for a translation or video-editing service.</p>
+      <ol>
+        <li><strong>One public link enters the browser validator.</strong> The page parses the value as a URL and accepts the supported Instagram Reel, post, TV, and share-link shapes. It does not accept a language instruction as part of the link and it stops unsupported profile or Story paths before a provider request.</li>
+        <li><strong>The Worker asks for transcript data.</strong> The browser calls the same-origin <code>/api/transcript</code> route. The Worker checks the URL and forwards a transcript request to its configured provider. The page does not send a target language, translation instruction, or OCR mode in that request.</li>
+        <li><strong>Returned fields are speech segments.</strong> The browser requires a content array and reads each segment's text, start offset, and duration. It joins non-blank text for the readable result and keeps the timing fields for subtitle exports. A language code, when returned, is metadata about the response; it is not a translated copy.</li>
+        <li><strong>TXT, SRT, and VTT preserve the same words.</strong> Copy and TXT make the joined transcript easy to read. SRT adds cue numbers and timecodes. VTT adds its header and period-separated timecodes. None of these formatters changes the language or reads the pixels in a Reel.</li>
+        <li><strong>The export route is not a renderer.</strong> The export action receives the transcript payload and selected format on the same-origin route. It returns a text file. No branch writes a new video, burns translated words into frames, or publishes captions back to Instagram.</li>
+        <li><strong>Empty speech has a defined message.</strong> If no returned segment contains non-whitespace text, the page says “No speech was found in this video.” Play the source before deciding whether it is music-only, silent, unclear, or simply unavailable to the provider. Text visible in the picture does not make that branch contain speech.</li>
+        <li><strong>There is no translation or speaker-label pass.</strong> The current page does not add a translated transcript, speaker names, OCR text, clip, batch job, or saved history. Keep those tasks in the next step of your own workflow instead of presenting them as part of this result.</li>
+        <li><strong>The page leaves the final language check to you.</strong> Compare the source audio, transcript, translation, and video frame. If a word could change the meaning, keep the original cue and your uncertainty in the editing notes.</li>
+      </ol>
+      <p>That boundary is useful: the transcript is a stable source document for reading and timing, while translation, visual-text capture, and rendered captions remain separate operations that can be checked on their own.</p>
+    </section>
+
+    <h2>How to avoid a misleading translated caption</h2>
+    <p>Do not translate a rough sentence and immediately burn it into the video. First mark names, numbers, idioms, and words that the audio makes hard to hear. Then compare the translation with the original cue range. A fluent sentence can still be wrong if the source word was misheard.</p>
+    <p>Keep three columns in your notes: source transcript, translation, and visual additions. This makes it clear whether a phrase came from speech, a title card, or your own explanation. It also gives an editor enough context to correct a subtitle without silently rewriting the source.</p>
+    <p>If the Reel contains only animated text and no spoken words, the transcript path may have nothing to return. Pause the video and record the visible text in the language workflow you actually need. Do not report an empty speech response as proof that the image contained no information.</p>
+
+    <h2>Frequently asked questions</h2>
+    <h3>Can I paste a Reel and get an English translation?</h3>
+    <p>This page returns the provider's transcript segments and subtitle exports. It does not translate them. Copy or download the source text, then run a separate translation review that keeps the original beside the result.</p>
+    <h3>Will the transcript include words added over the video?</h3>
+    <p>Not through the speech segment path alone. Use the <a href="/guides/instagram-video-to-text-on-screen-words/">on-screen words guide</a> and inspect the picture separately.</p>
+    <h3>Should I use TXT or SRT before translating?</h3>
+    <p>Use TXT when you need to translate the readable wording. Keep SRT or VTT as well when the translated version must follow the original cue timing.</p>
+    <h3>Does exporting VTT create captions on Instagram?</h3>
+    <p>No. VTT is a timed text file. An editor or platform workflow must apply it to a video, and you still need to watch the result for wording, timing, and visual context.</p>
+    <h3>What if the transcript says no speech?</h3>
+    <p>Read the exact result and play the source. The <a href="/guides/instagram-transcript-generator-stalled-request/">stalled-request guide</a> explains the difference between an empty response and a request that is still waiting.</p>
+
+    <h2>References</h2>
+    <ul>
+      <li><a href="https://docs.supadata.ai/errors/transcript-unavailable">Supadata documentation: Transcript Unavailable</a></li>
+      <li><a href="https://www.w3.org/WAI/WCAG22/Understanding/captions-prerecorded.html">W3C WAI: Captions (Prerecorded)</a></li>
+    </ul>
+    <p class="article-meta">Updated October 13, 2026 · <a href="/guides/">All guides</a> · <a href="/">Try the Instagram transcript tool</a></p>
+  </main>
+  <footer><span>Reel Transcript Lab</span><nav aria-label="Footer"><a href="/">Tool</a><a href="/guides/">Guides</a><a href="/about/">About</a><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a></nav></footer>
+</body>
+</html>
+

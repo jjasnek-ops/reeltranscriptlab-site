@@ -1,0 +1,16 @@
+outputs/node_modules/
+outputs/.wrangler/
+.wrangler/
+work/
+outputs/*.png
+outputs/agent-readiness/
+outputs/seo-cycle/
+outputs/seo-cycle/*.png
+outputs/seo-cycle/checkpoints/
+outputs/seo-cycle/run-log-*.md
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx

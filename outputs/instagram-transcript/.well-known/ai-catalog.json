@@ -1,0 +1,9 @@
+{
+  "specVersion": "1.0",
+  "host": {"displayName": "Reel Transcript Lab", "identifier": "did:web:reeltranscriptlab.com"},
+  "entries": [
+    {"identifier": "urn:air:reeltranscriptlab.com:api:public-guide-lookup", "displayName": "Public guide lookup API", "type": "application/vnd.oai.openapi+json", "url": "https://reeltranscriptlab.com/openapi.json", "representativeQueries": ["Find the guide about a transcript request that stalls", "Read the guide about checking subtitle timing"]},
+    {"identifier": "urn:air:reeltranscriptlab.com:server:public-guide-lookup", "displayName": "Public guide lookup MCP server", "type": "application/mcp-server-card+json", "url": "https://reeltranscriptlab.com/.well-known/mcp/server-card.json", "representativeQueries": ["Search Reel Transcript Lab guides", "Read a guide about public Instagram video transcripts"]},
+    {"identifier": "urn:air:reeltranscriptlab.com:skill:site-lookup", "displayName": "Public site lookup skill", "type": "text/markdown", "url": "https://reeltranscriptlab.com/ai/skills/site-lookup/SKILL.md", "representativeQueries": ["Find and read public transcript guides", "Answer a question using the site's published guide"]}
+  ]
+}
